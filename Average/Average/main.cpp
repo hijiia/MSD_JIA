@@ -24,4 +24,5 @@ int main() {
     result = (assign1 + assign2 + assign3 + assign4 +assign5)/5.0;
     std::cout << "Result:" << result << std::endl;// insert code here...
     return 0;
+    
 }
