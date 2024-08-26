@@ -41,6 +41,16 @@ int main(int argc, const char * argv[]) {
     return 0;
     
     //password
+bool isP
+    
+    
+    
+    
+    
+    
+    
+    
+    
     std::string password;
     bool isValid =false;
     while(!isValid){
@@ -63,4 +73,36 @@ int main(int argc, const char * argv[]) {
         
         
     }
+}
+
+    
+calculatePowewr ( int base, int exponent){
+    int result= base;
+    for (int i=0; i< exponent; i++)
+        result = result * base;
+}
+return result
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
