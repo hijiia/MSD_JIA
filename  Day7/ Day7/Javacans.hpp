@@ -7,7 +7,8 @@
 
 #ifndef Javacans_hpp
 #define Javacans_hpp
-
+#include "main.cpp"
 #include <stdio.h>
+std::vector <Politician> Javacans(std::vector <Politician> politicians);
 
 #endif /* Javacans_hpp */

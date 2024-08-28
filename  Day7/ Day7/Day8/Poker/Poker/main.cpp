@@ -1,22 +1,11 @@
 //
 //  main.cpp
-//   Day7
+//  Poker
 //
-//  Created by Jia Gao on 8/27/24.
+//  Created by Jia Gao on 8/28/24.
 //
 
 #include <iostream>
-#include <string>
-
-struct Politician{
-    std::string name;
-    std::string affiliation;
-    std::string sf;
-};
-
-
-
-
 
 int main(int argc, const char * argv[]) {
     // insert code here...
