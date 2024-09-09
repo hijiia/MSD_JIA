@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		174F6E482C863D2F00FEE38C /* pokerfunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 174F6E462C863D2F00FEE38C /* pokerfunction.cpp */; };
-		17D857022C7F88FD009F079D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D857012C7F88FD009F079D /* main.cpp */; };
+		17E886AA2C82138200F33AE0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17E886A92C82138200F33AE0 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		17D856FC2C7F88FD009F079D /* CopyFiles */ = {
+		17E886A42C82138200F33AE0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -24,14 +23,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		174F6E462C863D2F00FEE38C /* pokerfunction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pokerfunction.cpp; sourceTree = "<group>"; };
-		174F6E472C863D2F00FEE38C /* pokerfunction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pokerfunction.hpp; sourceTree = "<group>"; };
-		17D856FE2C7F88FD009F079D /* Poker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Poker; sourceTree = BUILT_PRODUCTS_DIR; };
-		17D857012C7F88FD009F079D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		17E886A62C82138200F33AE0 /* Vectors */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Vectors; sourceTree = BUILT_PRODUCTS_DIR; };
+		17E886A92C82138200F33AE0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		17D856FB2C7F88FD009F079D /* Frameworks */ = {
+		17E886A32C82138200F33AE0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,67 +38,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		17D856F52C7F88FD009F079D = {
+		17E8869D2C82138200F33AE0 = {
 			isa = PBXGroup;
 			children = (
-				17D857002C7F88FD009F079D /* Poker */,
-				17D856FF2C7F88FD009F079D /* Products */,
+				17E886A82C82138200F33AE0 /* Vectors */,
+				17E886A72C82138200F33AE0 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		17D856FF2C7F88FD009F079D /* Products */ = {
+		17E886A72C82138200F33AE0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				17D856FE2C7F88FD009F079D /* Poker */,
+				17E886A62C82138200F33AE0 /* Vectors */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		17D857002C7F88FD009F079D /* Poker */ = {
+		17E886A82C82138200F33AE0 /* Vectors */ = {
 			isa = PBXGroup;
 			children = (
-				17D857012C7F88FD009F079D /* main.cpp */,
-				174F6E462C863D2F00FEE38C /* pokerfunction.cpp */,
-				174F6E472C863D2F00FEE38C /* pokerfunction.hpp */,
+				17E886A92C82138200F33AE0 /* main.cpp */,
 			);
-			path = Poker;
+			path = Vectors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		17D856FD2C7F88FD009F079D /* Poker */ = {
+		17E886A52C82138200F33AE0 /* Vectors */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 17D857052C7F88FD009F079D /* Build configuration list for PBXNativeTarget "Poker" */;
+			buildConfigurationList = 17E886AD2C82138200F33AE0 /* Build configuration list for PBXNativeTarget "Vectors" */;
 			buildPhases = (
-				17D856FA2C7F88FD009F079D /* Sources */,
-				17D856FB2C7F88FD009F079D /* Frameworks */,
-				17D856FC2C7F88FD009F079D /* CopyFiles */,
+				17E886A22C82138200F33AE0 /* Sources */,
+				17E886A32C82138200F33AE0 /* Frameworks */,
+				17E886A42C82138200F33AE0 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Poker;
-			productName = Poker;
-			productReference = 17D856FE2C7F88FD009F079D /* Poker */;
+			name = Vectors;
+			productName = Vectors;
+			productReference = 17E886A62C82138200F33AE0 /* Vectors */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		17D856F62C7F88FD009F079D /* Project object */ = {
+		17E8869E2C82138200F33AE0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
-					17D856FD2C7F88FD009F079D = {
+					17E886A52C82138200F33AE0 = {
 						CreatedOnToolsVersion = 15.4;
 					};
 				};
 			};
-			buildConfigurationList = 17D856F92C7F88FD009F079D /* Build configuration list for PBXProject "Poker" */;
+			buildConfigurationList = 17E886A12C82138200F33AE0 /* Build configuration list for PBXProject "Vectors" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -109,30 +104,29 @@
 				en,
 				Base,
 			);
-			mainGroup = 17D856F52C7F88FD009F079D;
-			productRefGroup = 17D856FF2C7F88FD009F079D /* Products */;
+			mainGroup = 17E8869D2C82138200F33AE0;
+			productRefGroup = 17E886A72C82138200F33AE0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				17D856FD2C7F88FD009F079D /* Poker */,
+				17E886A52C82138200F33AE0 /* Vectors */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		17D856FA2C7F88FD009F079D /* Sources */ = {
+		17E886A22C82138200F33AE0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17D857022C7F88FD009F079D /* main.cpp in Sources */,
-				174F6E482C863D2F00FEE38C /* pokerfunction.cpp in Sources */,
+				17E886AA2C82138200F33AE0 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		17D857032C7F88FD009F079D /* Debug */ = {
+		17E886AB2C82138200F33AE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -193,7 +187,7 @@
 			};
 			name = Debug;
 		};
-		17D857042C7F88FD009F079D /* Release */ = {
+		17E886AC2C82138200F33AE0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -247,7 +241,7 @@
 			};
 			name = Release;
 		};
-		17D857062C7F88FD009F079D /* Debug */ = {
+		17E886AE2C82138200F33AE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -255,7 +249,7 @@
 			};
 			name = Debug;
 		};
-		17D857072C7F88FD009F079D /* Release */ = {
+		17E886AF2C82138200F33AE0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -266,25 +260,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		17D856F92C7F88FD009F079D /* Build configuration list for PBXProject "Poker" */ = {
+		17E886A12C82138200F33AE0 /* Build configuration list for PBXProject "Vectors" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				17D857032C7F88FD009F079D /* Debug */,
-				17D857042C7F88FD009F079D /* Release */,
+				17E886AB2C82138200F33AE0 /* Debug */,
+				17E886AC2C82138200F33AE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		17D857052C7F88FD009F079D /* Build configuration list for PBXNativeTarget "Poker" */ = {
+		17E886AD2C82138200F33AE0 /* Build configuration list for PBXNativeTarget "Vectors" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				17D857062C7F88FD009F079D /* Debug */,
-				17D857072C7F88FD009F079D /* Release */,
+				17E886AE2C82138200F33AE0 /* Debug */,
+				17E886AF2C82138200F33AE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 17D856F62C7F88FD009F079D /* Project object */;
+	rootObject = 17E8869E2C82138200F33AE0 /* Project object */;
 }

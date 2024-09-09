@@ -6,24 +6,27 @@
 //
 
 #include <iostream>
+#include <vector>
+#include <string>
+#include "pokerfunction.hpp"
+
 
 int main(int argc, const char * argv[]) {
-#include <iostream>
-#include <string>
-#include "CardsUtil.hpp"
-#include <vector>
+
+    std::vector <card> totalcards = Deck();
+    printOut(totalcards);
     
-    using namespace std;
+    shuffling(totalcards);
+    printOut(totalcards);
     
-    
-    int main(int argc, const char * argv[]) {
-        vector<Card> deck;
-        vector<Card> shuffleledDeck;
-        
-        srand(<>)//create and print deck of cards
-        deck=CreateDeck();
-        PrintDeck(deck);
-        
-        return 0;
+    //bool isFlush (totalcards)
+    if (isFlush (totalcards) == true){
+        std::cout <<"This is a flush.";
+    }else{
+        std::cout <<"This is not a flush.";
     }
+    
 }
+
+
+// 
