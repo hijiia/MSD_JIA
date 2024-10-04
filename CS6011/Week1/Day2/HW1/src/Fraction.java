@@ -1,6 +1,6 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Fraction {
+public class Fraction implements Comparable<Fraction> {
     private long nominator;
     private long denominator;
     private long GCD () {
@@ -36,7 +36,7 @@ public class Fraction {
         this.denominator = d;
         reduce();
         if (d == 0) {
-            System.out.println("invalid number");
+            throw new IllegalArgumentException("Denominator cannot be zero.");
         }
         if (d < 0) {
             this.nominator = -n;
@@ -67,7 +67,7 @@ public class Fraction {
 
     Fraction dividedBy(Fraction rhs) {
         if (this.nominator == 0) {
-            System.out.println("can not divide by zero");
+            throw new IllegalArgumentException("Cannot divide by a fraction with a numerator of zero.");
         }
         long newnumerator = this.nominator * rhs.denominator;
         long newdenominator = this.denominator * rhs.nominator;
@@ -76,7 +76,7 @@ public class Fraction {
 
     Fraction reciprocal() {
         if (this.nominator == 0) {
-            System.out.println("can not divide by zero");
+            throw new IllegalArgumentException("Cannot take reciprocal of a fraction with a numerator of zero.");
         }
         long newnumerator = this.denominator;
         long newdenominator = this.nominator;
@@ -93,7 +93,18 @@ public class Fraction {
     }
 
 
+    @Override
+    public int compareTo(Fraction o) {
+        Fraction gap = new Fraction();
+        gap = this.minus(o);
+        if (gap.toDouble() > 0) {
+            return 1;
+        } else if (gap.toDouble() < 0) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
 }
-
 
 

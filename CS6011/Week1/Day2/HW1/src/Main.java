@@ -1,33 +1,31 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
 
-
-        Fraction frac1 = new Fraction(1, 2);  // 1/2
-        Fraction frac2 = new Fraction(3, 4);  // 3/4
-
-        Fraction sum = frac1.plus(frac2);
-        Fraction difference = frac1.minus(frac2);
-        Fraction product = frac1.times(frac2);
-        Fraction quotient = frac1.dividedBy(frac2);
-        Fraction reciprocal1 = frac1.reciprocal();
-        Fraction reciprocal2 = frac2.reciprocal();
-
-
-        System.out.println("Sum: " + sum);
-        System.out.println("Difference: " + difference);
-        System.out.println("Product: " + product);
-        System.out.println("Quotient: " + quotient);
-        System.out.println("Reciprocal of Fraction 1: " + reciprocal1);
-        System.out.println("Reciprocal of Fraction 2: " + reciprocal2);
-        System.out.println("Fraction 1 as double: " + frac1.toDouble());
-        System.out.println("Fraction 2 as double: " + frac2.toDouble());
-
-
-
+        ArrayList<Fraction> flist = new ArrayList<>();
+        Fraction f1 = new Fraction(1, 2);
+        flist.add(f1);
+        Fraction f2 = new Fraction(1, 3);
+        flist.add(f2);
+        Fraction f3 = new Fraction(1, 4);
+        flist.add(f3);
+        Fraction f4 = new Fraction(1, 5);
+        flist.add(f4);
+        Fraction f5 = new Fraction(1, 6);
+        flist.add(f5);
+        for (Fraction fractions : flist) {
+            System.out.print(fractions.toString() + " ");
+        }
+        Collections.sort(flist);
+        System.out.println();
+        for (Fraction fractions : flist) {
+            System.out.print(fractions.toString() + " ");
+        }
     }
+
+
 }
-
-
-
 

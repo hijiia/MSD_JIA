@@ -1,6 +1,15 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 class FractionTest {
+    @Test
+    public void testCompareTo() {
+        Fraction frac1 = new Fraction(1, 2);  // 1/2
+        Fraction frac2 = new Fraction(1, 3);  // 1/3
+        Assertions.assertTrue(frac1.compareTo(frac2) > 0);  // 1/2 > 1/3
+        Assertions.assertTrue(frac2.compareTo(frac1) < 0);  // 1/3 < 1/2
+        Assertions.assertTrue(frac1.compareTo(frac1) == 0); // 1/2 == 1/2
+    }
+
 
     @Test
     public void runATest() {
@@ -27,5 +36,14 @@ class FractionTest {
         Fraction expectedReciprocal = new Fraction(3, 2); // Reciprocal of 2/3 = 3/2
         Assertions.assertEquals(expectedReciprocal.toString(), frac3.reciprocal().toString());
 
+    }
+    @Test
+    public void testZero(){
+        try{
+        Fraction frac1 = new Fraction(1, 0);
+        Assertions.fail(("Expected IllegalArgumentException to be thrown"));
+
+    } catch (IllegalArgumentException e) {
+        Assertions.assertEquals("Denominator cannot be zero.", e.getMessage());}
     }
 }
