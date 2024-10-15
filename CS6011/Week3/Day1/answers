@@ -1,0 +1,12 @@
+Q1
+1.Using defer allows the JavaScript file to download in parallel, but it will only execute after the HTML document has been fully parsed. 
+This enables the page content to render faster, improving the user experience.
+2.Ensures that the DOM is fully loaded before the script is executed.
+3.Ensures that multiple defer scripts execute in the order they appear in the HTML.
+Q2
+document.writeln() directly influence the content of the webpage
+I use console.log(),because I want to output information to help me understand what the JavaScript is doing during development without affecting the content on the page.
+Q3
+I can see structure of array in the console
+Q4
+The first way is the traditional function declaration, where the function can be called before it is defined.
