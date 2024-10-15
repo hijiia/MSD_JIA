@@ -1,0 +1,13 @@
+const header = document.createElement('h1');
+header.textContent = 'Welcome to My Dynamic Page!';
+document.body.appendChild(header);
+const paragraph = document.createElement('p');
+paragraph.textContent = 'This is a web page created using only the JavaScript DOM API.';
+paragraph.style.color = 'blue';
+paragraph.style.fontSize = '18px';
+paragraph.style.fontFamily = 'Arial, sans-serif';
+document.body.appendChild(paragraph);
+const footer = document.createElement('footer');
+footer.textContent = '© 2024 Jia. All rights reserved.';
+footer.style.marginTop = '20px';
+document.body.appendChild(footer);
