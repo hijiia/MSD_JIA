@@ -1,0 +1,32 @@
+
+table {
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+}
+
+
+.highlighted {
+    background-color: lightblue;
+}
+
+
+.clicked {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+p {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
