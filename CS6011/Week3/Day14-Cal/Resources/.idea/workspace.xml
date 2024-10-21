@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2eaefdf1-af41-4abf-b51e-55e6adbe42dc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../CS6010/Day7/ Day7/Cards/Cards/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../CS6010/Day7/ Day7/Cards/Cards/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day12-Sorting/mySort.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day12-Sorting/mySort.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day10/CommandLineArgs/CommandLineArgs.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day10/CommandLineArgs/CommandLineArgs.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day10/CommandLineArgs/CommandLineArgs.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day10/CommandLineArgs/CommandLineArgs/main" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day10/CommandLineArgs/CommandLineArgs/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day10/CommandLineArgs/CommandLineArgs/main.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day11/day11.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day2 /Average/Average.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day2 /Average/Average.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day2 /Average/Average.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day2 /Average/Average/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day2 /RoadTripCalculator/RoadTripCalculator.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day2 /RoadTripCalculator/RoadTripCalculator.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day2 /RoadTripCalculator/RoadTripCalculator.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day2 /RoadTripCalculator/RoadTripCalculator/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day20 cmake/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day20 cmake/Day20 cmake.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day20 cmake/Day20 cmake.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day20 cmake/Day20 cmake.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day20 cmake/Day20 cmake/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day20 cmake/src/helloSFML.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/ForLoopPractice/ForLoopPractice.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/ForLoopPractice/ForLoopPractice.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/ForLoopPractice/ForLoopPractice.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/ForLoopPractice/ForLoopPractice/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/IfStatementPART 2/IfStatementPART 2.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/IfStatementPART 2/IfStatementPART 2.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/IfStatementPART 2/IfStatementPART 2.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/IfStatementPART 2/IfStatementPART 2/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/IfStatementPART1/IfStatementPractice.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/IfStatementPART1/IfStatementPractice.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/IfStatementPART1/IfStatementPractice.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day3/IfStatementPART1/IfStatementPractice/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/DateFormats/DateFormats.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/DateFormats/DateFormats.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/DateFormats/DateFormats.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/DateFormats/DateFormats/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/MagicDates/MagicDates.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/MagicDates/MagicDates.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/MagicDates/MagicDates.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/MagicDates/MagicDates/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/Palindromes/Palindromes.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/Palindromes/Palindromes.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/Palindromes/Palindromes.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/Palindromes/Palindromes/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/romanNumbers/romanNumbers.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/romanNumbers/romanNumbers.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/romanNumbers/romanNumbers.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day4/romanNumbers/romanNumbers/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day5/StringAnalyzerDay5/StringAnalyzerDay5/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day5/functionPractice/callingFunction.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day5/functionPractice/callingFunction.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day5/functionPractice/callingFunction.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day5/functionPractice/functionPractice/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day6/Vectors/Vectors.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day6/Vectors/Vectors.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day6/Vectors/Vectors.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day6/Vectors/Vectors/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day6/Vectors/Vectors/vectorFunction.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day6/Vectors/Vectors/vectorFunction.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day7/ Day7/Cards/Cards.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day7/ Day7/Cards/Cards.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day7/ Day7/Cards/Cards.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Day7/ Day7/Cards/Cards/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../FINAL/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../FINAL/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../hello world/hello world.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../hello world/hello world.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../hello world/hello world.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../hello world/hello world/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../map and set/map and set.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../map and set/map and set.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../map and set/map and set.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../map and set/map and set/main.cpp" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2njSagkvJsGzkdQfZ6PYEU3u6Q4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaScript Debug.index.html.executor": "Run",
+    "Node.js.script.js.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/jiagao/repository_jia/MSD_JIA/CS6011/Week3/Day14-Cal/Resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.22855.74" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.22855.74" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2eaefdf1-af41-4abf-b51e-55e6adbe42dc" name="Changes" comment="" />
+      <created>1729485056910</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729485056910</updated>
+      <workItem from="1729485057930" duration="3143000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
