@@ -7,10 +7,10 @@ window.onload = function() {
 
 
     const playerImage = new Image();
-    playerImage.src = 'player.png'; // Use your image path
+    playerImage.src = 'player.png';
 
     const followerImage = new Image();
-    followerImage.src = 'follower.png'; // Use your image path
+    followerImage.src = 'follower.png'; 
 
 
     const player = { x: 300, y: 200, width: 50, height: 50 };
