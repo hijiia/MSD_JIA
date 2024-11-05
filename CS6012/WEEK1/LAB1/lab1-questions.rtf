@@ -1,0 +1,62 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Bold;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red57\green57\blue57;}
+{\*\expandedcolortbl;;\cssrgb\c28627\c28627\c28627;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\b\fs29\fsmilli14667 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Where is the assertEquals method defined? What does it do? Can we use assertEquals for more than just int types? (Hint: Consult the API for JUnit)
+\f1\b0 \
+Method: assertEquals(expected, actual); \'a0\
+This method\'a0is defined in the Assertions class of the JUnit library\'a0compare two values (expected and actual) and verify that they are equal. If the values are not equal, the test will fail.\
+AssertEquals can take various parameter types.\
+Primitive types: int, double, float, etc.\
+Objects: Any object types (e.g., String, List, or custom objects).\
+Custom messages: custom error messages to provide more context on test failure.\
+\'a0\
+
+\f0\b Briefly describe what each of the three tests is checking.
+\f1\b0 \
+\'a0\
+1.checks the behavior of findSmallestDiff when given an empty array\'a0\
+2.verifies the function\'92s response when all elements in the array are identical.\
+3.checks the function with an array of random integers with positive, negative, and zero values.\
+\'a0\
+
+\f0\b Why is our unimplemented findSmallestDiff method passing one of the tests?
+\f1\b0 \
+\'a0\
+The initial unimplemented findSmallestDiff method was passing one test because its default return value was 0, which coincidentally matched the expected outcome of the test allArrayElementsEqual().\
+\'a0\
+
+\f0\b Why are we failing the third test? How should our method be modified to correct this?
+\f1\b0 \
+The smallest difference we are finding is the absolute value of difference.\
+use Math.abs()\
+\'a0\
+
+\f0\b What is the appropriate call to assertEquals for your new test (test 4)?
+\f1\b0 \
+@Test\
+public void duplicatedArrayElements() \{\
+\'a0 \'a0 assertEquals(0, DiffUtil.findSmallestDiff(arr4));\
+\}\
+\'a0\
+
+\f0\b Provide one more test (test 5) for the findSmallestDiff method. Briefly describe your test and write the call to assertEquals here.
+\f1\b0 \
+\'a0\
+@Test\
+\'a0 \'a0 public void consecutiveNumbersArray() \{\
+\'a0 \'a0 \'a0 \'a0 assertEquals(1, DiffUtil.findSmallestDiff(arr7));\
+\'a0 \'a0 \}\
+\'a0\
+examine the difference of an array if consecutive numbers\
+\'a0\
+
+\f0\b Briefly describe your unit tests for Assignment 1.
+\f1\b0 \
+They include tests for special cases like empty arrays, identical elements, large numbers, duplicate elements, when the array contains exactly two elements, \'a0consecutive integers.\
+}
