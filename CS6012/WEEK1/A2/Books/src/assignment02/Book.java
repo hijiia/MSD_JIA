@@ -1,7 +1,5 @@
-package assign02;
+package assigment02;
 
-
-import java.util.ArrayList;
 
 public class Book {
 
