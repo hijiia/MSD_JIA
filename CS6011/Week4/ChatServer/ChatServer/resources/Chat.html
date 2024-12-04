@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #chatArea {
+      display: none;
+    }
+    textarea {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 10px;
+      resize: none;
+    }
+    input[type="text"], input[type="button"] {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+<h1>Chat Application</h1>
+
+<div id="loginArea">
+  <h2>Join Chat</h2>
+  <input type="text" id="username" placeholder="Enter your username" required><br>
+  <input type="text" id="roomname" placeholder="Enter room name (lowercase)" required><br>
+  <input type="button" id="joinBtn" value="Join">
+</div>
+
+<div id="chatArea">
+  <h2>Chat Room: <span id="roomLabel"></span></h2>
+  <textarea id="chatBox" readonly></textarea><br>
+  <input type="text" id="messageInput" placeholder="Type your message"><br>
+  <input type="button" id="sendBtn" value="Send Message">
+  <input type="button" id="leaveBtn" value="Leave Chat">
+</div>
+
+<script src="chat.js"></script>
+</body>
+</html>
