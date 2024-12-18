@@ -1,4 +1,8 @@
-//find the index of the minimum element in a subarray
+function compareFunc (a,b){
+    return a < b
+}
+
+//find the index of the minimum element
 function findMinLocation(arr, start, compareFunc) {
     let minIndex = start;
     for (let i = start + 1; i < arr.length; i++) {
@@ -9,7 +13,7 @@ function findMinLocation(arr, start, compareFunc) {
     return minIndex;
 }
 
-// Selection sort implementation
+// Selection sort
 function selectionSort(arr, compareFunc) {
     for (let i = 0; i < arr.length - 1; i++) {
         let minIndex = findMinLocation(arr, i, compareFunc);
@@ -26,13 +30,13 @@ function selectionSort(arr, compareFunc) {
 // Sorting integers
 let intArray = [5, 3, 8, 1, 2];
 console.log("Original int array:", intArray);
-selectionSort(intArray, (a, b) => a < b);
+selectionSort(intArray, compareFunc);
 console.log("Sorted int array:", intArray);
 
 // Sorting floating point numbers
 let floatArray = [2.5, 0.1, 3.3, 1.7, 4.0];
 console.log("Original float array:", floatArray);
-selectionSort(floatArray, (a, b) => a < b);
+selectionSort(floatArray, compareFunc);
 console.log("Sorted float array:", floatArray);
 
 // Sorting strings
@@ -50,7 +54,7 @@ console.log("Sorted mixed array:", mixedArray);
 // person object
 let people = [
     { first: "Jia", last: "Gao" },
-    { first: "Nico", last: "Wang" },
+    { first: "Chloe", last: "Andrew" },
     { first: "Alice", last: "Tao" },
     { first: "Nick", last: "Nelson" }
 ];

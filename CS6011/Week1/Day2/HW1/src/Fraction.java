@@ -15,8 +15,8 @@ public class Fraction implements Comparable<Fraction> {
     }
     private void reduce() {
         long gcd = GCD();
-        this.nominator /= gcd;
-        this.denominator /= gcd;
+        this.nominator = gcd;
+        this.denominator = gcd;
         if (this.nominator == 0) {
             System.out.println("invalid number");
         }

@@ -9,8 +9,9 @@ window.onload = function() {
     const playerImage = new Image();
     playerImage.src = 'player.png';
 
-    const followerImage = new Image();
-    followerImage.src = 'follower.png'; 
+    // const followerImage = new Image();
+    // followerImage.src = 'follower.png';
+    // end game
 
 
     const player = { x: 300, y: 200, width: 50, height: 50 };

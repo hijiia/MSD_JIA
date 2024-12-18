@@ -1,2 +1,0 @@
-# MSD_JIA
-MSD WORK
