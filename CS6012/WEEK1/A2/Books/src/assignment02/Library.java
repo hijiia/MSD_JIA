@@ -1,7 +1,7 @@
-package assigment02;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
+package assignment02;
+import java.util.*;
+
+import static java.util.Collections.sort;
 
 public class Library<Type> {
 
@@ -24,15 +24,16 @@ public class Library<Type> {
   }
 
 
-public List<LibraryBook<Type>> lookup(Type holder) {
-  List<LibraryBook<Type>> result = new ArrayList<>();
-  for (LibraryBook<Type> book : libraryBooks) {
-    if (book.getHolder() != null && book.getHolder().equals(holder)) {
-      result.add(book);
+  public List<LibraryBook<Type>> lookup(Type holder) {
+    List<LibraryBook<Type>> result = new ArrayList<>();
+    for (LibraryBook<Type> book : libraryBooks) {
+      if (book.getHolder() != null && book.getHolder().equals(holder)) {
+        result.add(book);
+      }
     }
+    return result;  // Return empty if no books are checked out by the holder
   }
-  return result;  // Return empty if no books are checked out by the holder
-}
+
   // Checkout a book by ISBN and assign it to a holder
   public boolean checkout(long isbn, Type holder, int month, int day, int year) {
     LibraryBook<Type> book = lookup(isbn);
@@ -67,4 +68,52 @@ public List<LibraryBook<Type>> lookup(Type holder) {
     }
     return true;
   }
+  protected class OrderByAuthor implements Comparator<LibraryBook<Type>> {
+    @Override
+    public int compare(LibraryBook<Type> lhs, LibraryBook<Type> rhs) {
+      int authorComparison = lhs.getAuthor().compareTo(rhs.getAuthor());
+      if (authorComparison != 0) {
+        return authorComparison; // 如果作者不同，直接返回结果
+      }
+      // 如果作者相同，则按书名排序
+      return lhs.getTitle().compareTo(rhs.getTitle());
+    }
+  }
+  protected class OrderByDueDate implements Comparator<LibraryBook<Type>> {
+    @Override
+    public int compare(LibraryBook<Type> lhs, LibraryBook<Type> rhs) {
+      if (lhs.getDueDate() == null && rhs.getDueDate() != null) {
+        return 1; // 无到期日期的书籍被视为在有到期日期的书籍之后
+      } else if (lhs.getDueDate() != null && rhs.getDueDate() == null) {
+        return -1; // 有到期日期的书籍排在无到期日期的书籍之前
+      } else if (lhs.getDueDate() == null && rhs.getDueDate() == null) {
+        return 0; // 两本书都没有到期日期
+      }
+      return lhs.getDueDate().compareTo(rhs.getDueDate()); // 比较到期日期
+    }
+  }
+
+  public ArrayList<LibraryBook<Type>> getOrderedByAuthor() {
+    ArrayList<LibraryBook<Type>> libraryCopy = new ArrayList<>();
+    libraryCopy.addAll(libraryBooks);
+    OrderByAuthor comparator = new OrderByAuthor();
+    sort(libraryCopy, comparator);
+    return libraryCopy;
+  }
+  public ArrayList<LibraryBook<Type>> getOverdueList(int month, int day, int year) {
+    ArrayList<LibraryBook<Type>> overdueList = new ArrayList<>();
+    Date inputDate = new GregorianCalendar(year, month - 1, day).getTime();
+
+    for (LibraryBook<Type> book : libraryBooks) {
+      if (book.getDueDate() != null && book.getDueDate().before(inputDate)) {
+        overdueList.add(book);
+      }
+    }
+
+    OrderByDueDate comparator = new OrderByDueDate();
+    sort(overdueList, comparator);
+    return overdueList;
+  }
+
+
 }

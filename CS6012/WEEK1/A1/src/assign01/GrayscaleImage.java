@@ -65,6 +65,7 @@ public class GrayscaleImage {
     }
 
 
+
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof GrayscaleImage)) {

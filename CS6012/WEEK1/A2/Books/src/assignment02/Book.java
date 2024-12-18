@@ -1,4 +1,4 @@
-package assigment02;
+package assignment02;
 
 
 public class Book {

@@ -1,4 +1,4 @@
-package assigment02;
+package assignment02;
 
 import java.util.GregorianCalendar;
 
