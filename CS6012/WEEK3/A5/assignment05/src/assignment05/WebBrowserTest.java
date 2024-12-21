@@ -29,7 +29,6 @@ class WebBrowserTest {
 
     }
 
-
     @org.junit.jupiter.api.Test
     void history() throws MalformedURLException {
         WebBrowser browser = new WebBrowser();
@@ -38,10 +37,8 @@ class WebBrowserTest {
         browser.visit(new URL("https://c.com"));
 
         SinglyLinkedList<URL> history = browser.history();
-        assertEquals("https://c.com", history.getFirst().toString());
-        history.deleteFirst();
-        assertEquals("https://b.com", history.getFirst().toString());
-        assertEquals("https://a.com", history.delete(1).toString());
+        assertEquals("https://c.com", history.get(0).toString()); // Most recent
+        assertEquals("https://b.com", history.get(1).toString());
+        assertEquals("https://a.com", history.get(2).toString()); // Least recent
     }
-
 }

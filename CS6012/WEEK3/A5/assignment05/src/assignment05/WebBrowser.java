@@ -20,6 +20,7 @@ public class WebBrowser {
 
     /**
      * creates a new web brower with a preloaded history of visited webpage
+     *
      * @param history -- a list of URLLinks to an external site
      *                the 1st page is the "current"
      *                remaining are previous
@@ -94,20 +95,24 @@ public class WebBrowser {
      */
     public SinglyLinkedList<URL> history() {
         SinglyLinkedList<URL> historyList = new SinglyLinkedList<>();
+
+        // Add the current page if it's not null
         if (current != null) {
-            historyList.insertFirst(current);
+            historyList.insertFirst(current);  // Most recent page goes first
         }
+
+        // Use a temporary stack to reverse the order of the back stack
         LinkedListStack<URL> temp = new LinkedListStack<>();
-
         while (!back.isEmpty()) {
-            temp.push(back.pop());
+            temp.push(back.pop());  // Transfer all URLs from the back stack to temp
         }
 
+        // pop from the temp stack and insert at the front of historyList
         while (!temp.isEmpty()) {
             URL url = temp.pop();
-            historyList.insert(historyList.size()-1,url);
-            back.push(url);
+            historyList.insertFirst(url);  // Insert each URL at the front
         }
+
         return historyList;
     }
 }
