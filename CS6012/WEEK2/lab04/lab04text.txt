@@ -1,0 +1,10 @@
+Lab04
+
+Part 1
+Two tests fail for arr2 because the binarySearch method incorrectly uses the index (mid) instead of the value at that index (arr[mid]). The goal is to check whether the target value exists in the array, not to compare the target with the index.
+It is returning false when it should be true.
+In binarySearch, the method which passed mid was the index number. However, the goal is to find the actual number in the array. So edit the code like arr[mid] could fix it.
+Loop2 and loop3 appear to be infinite.
+In loop2, the condition was b < 10. Since b = 0 and the only equation for b was b *= a, 0*= any number maintain 0. The condition will never satisfy; In loop3, same that the condition was a>c. However, in the loop, only the value of a was increment but not c. The condition will never meet as well.
+The call to password.split(" “) is to divide each character by space and ignore the space.
+The correct password is 1 4 9 16 25
