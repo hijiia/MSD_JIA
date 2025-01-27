@@ -10,7 +10,6 @@
 #include <stdio.h>
 
 
-
 void use_arguments(int argc, const char* argv[]){
     bool test = false;
     
