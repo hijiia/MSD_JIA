@@ -5,8 +5,6 @@
 //  Created by Jia Gao on 1/18/25.
 //
 #include <stdio.h>
-#define CATCH_CONFIG_MAIN
-#define CATCH_CONFIG_MAIN
 #include "catch.h"
 #include "exp.h"
 

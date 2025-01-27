@@ -1,13 +1,11 @@
-//
-//  cmdline.h
-//  Phase1
+
 //
 //
 
-#ifndef cmdline_h
-#define cmdline_h
+#ifndef cmdline_hpp
+#define cmdline_hpp
+#include "catch.h"
 
-void use_arguments(int argc, char* argv[]);
+void use_arguments(int argc, const char* argv[]);
 
-#endif /* cmdline_h */
-
+#endif /* cmdline_hpp */

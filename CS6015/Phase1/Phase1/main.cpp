@@ -1,12 +1,11 @@
 //
-//  main.cpp
-//  Phase1
 //
 
 #include <iostream>
-#define CATCH_CONFIG_RUNNER
-#include "catch.h"
-int main(int argc, char **argv) {
-    int result = Catch::Session().run(argc, argv);
-    return (result == 0) ? 0 : 1;
+#include "cmdline.h"
+
+int main(int argc, const char * argv[]) {
+    use_arguments(argc, argv);
+    // Catch::Session session;
+    return 0;
 }
