@@ -1,0 +1,355 @@
+Script started on Thu Jan 23 11:54:17 2025
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mclang++ *.cpp -g -O0 -o program[27m
+[K[A[37C[27mc[27ml[27ma[27mn[27mg[27m+[27m+[27m [27m*[27m.[27mc[27mp[27mp[27m [27m-[27mg[27m [27m-[27mO[27m0[27m [27m-[27mo[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[1B[K[?2004l
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mls -l program[27m[13D[27ml[27ms[27m [27m-[27ml[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[?2004l
+-rwxr-xr-x  1 jiagao  staff  243720 Jan 23 11:54 program
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mlldb program[27m[12D[27ml[27ml[27md[27mb[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[?2004l
+(lldb) target create "program"
+[2mLocating external symbol file for program...[0m[K[2K[2mLoading Apple DWARF index for program...[0m[K[2K[2mLocating external symbol file for dyld...[0m[K[2K[2mParsing symbol table for dyld...[0m[K[2K[2mLocating external symbol file for libc++.1.dylib...[0m[K[2K[2mParsing symbol table for libc++.1.dylib...[0m[K[2K[2mLocating external symbol file for libSystem.B.dylib...[0m[K[2K[2mParsing symbol table for libSystem.B.dylib...[0m[K[2K[2mLocating external symbol file for libc++abi.dylib...[0m[K[2K[2mParsing symbol table for libc++abi.dylib...[0m[K[2K[2mLocating external symbol file for libcache.dylib...[0m[K[2K[2mParsing symbol table for libcache.dylib...[0m[K[2K[2mLocating external symbol file for libcommonCrypto.dylib...[0m[K[2K[2mParsing symbol table for libcommonCrypto.dylib...[0m[K[2K[2mLocating external symbol file for libcompiler_rt.dylib...[0m[K[2K[2mParsing symbol table for libcompiler_rt.dylib...[0m[K[2K[2mLocating external symbol file for libcopyfile.dylib...[0m[K[2K[2mParsing symbol table for libcopyfile.dylib...[0m[K[2K[2mLocating external symbol file for libcorecrypto.dylib...[0m[K[2K[2mParsing symbol table for libcorecrypto.dylib...[0m[K[2K[2mLocating external symbol file for libdispatch.dylib...[0m[K[2K[2mParsing symbol table for libdispatch.dylib...[0m[K[2K[2mLocating external symbol file for libdyld.dylib...[0m[K[2K[2mParsing symbol table for libdyld.dylib...[0m[K[2K[2mLocating external symbol file for libkeymgr.dylib...[0m[K[2K[2mParsing symbol table for libkeymgr.dylib...[0m[K[2K[2mLocating external symbol file for libmacho.dylib...[0m[K[2K[2mParsing symbol table for libmacho.dylib...[0m[K[2K[2mLocating external symbol file for libquarantine.dylib...[0m[K[2K[2mParsing symbol table for libquarantine.dylib...[0m[K[2K[2mLocating external symbol file for libremovefile.dylib...[0m[K[2K[2mParsing symbol table for libremovefile.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_asl.dylib...[0m[K[2K[2mParsing symbol table for libsystem_asl.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_blocks.dylib...[0m[K[2K[2mParsing symbol table for libsystem_blocks.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_c.dylib...[0m[K[2K[2mParsing symbol table for libsystem_c.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_collections.dylib...[0m[K[2K[2mParsing symbol table for libsystem_collections.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_configuration.dylib...[0m[K[2K[2mParsing symbol table for libsystem_configuration.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_containermanager.dylib...[0m[K[2K[2mParsing symbol table for libsystem_containermanager.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_coreservices.dylib...[0m[K[2K[2mParsing symbol table for libsystem_coreservices.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_darwin.dylib...[0m[K[2K[2mParsing symbol table for libsystem_darwin.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_darwindirectory.dylib...[0m[K[2K[2mParsing symbol table for libsystem_darwindirectory.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_dnssd.dylib...[0m[K[2K[2mParsing symbol table for libsystem_dnssd.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_featureflags.dylib...[0m[K[2K[2mParsing symbol table for libsystem_featureflags.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_info.dylib...[0m[K[2K[2mParsing symbol table for libsystem_info.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_m.dylib...[0m[K[2K[2mParsing symbol table for libsystem_m.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_malloc.dylib...[0m[K[2K[2mParsing symbol table for libsystem_malloc.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_networkextension.dylib...[0m[K[2K[2mParsing symbol table for libsystem_networkextension.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_notify.dylib...[0m[K[2K[2mParsing symbol table for libsystem_notify.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_sandbox.dylib...[0m[K[2K[2mParsing symbol table for libsystem_sandbox.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_secinit.dylib...[0m[K[2K[2mParsing symbol table for libsystem_secinit.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_kernel.dylib...[0m[K[2K[2mParsing symbol table for libsystem_kernel.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_platform.dylib...[0m[K[2K[2mParsing symbol table for libsystem_platform.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_pthread.dylib...[0m[K[2K[2mParsing symbol table for libsystem_pthread.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_symptoms.dylib...[0m[K[2K[2mParsing symbol table for libsystem_symptoms.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_trace.dylib...[0m[K[2K[2mParsing symbol table for libsystem_trace.dylib...[0m[K[2K[2mLocating external symbol file for libunwind.dylib...[0m[K[2K[2mParsing symbol table for libunwind.dylib...[0m[K[2K[2mLocating external symbol file for libxpc.dylib...[0m[K[2K[2mParsing symbol table for libxpc.dylib...[0m[K[2K[2mLocating external symbol file for libobjc.A.dylib...[0m[K[2K[2mParsing symbol table for libobjc.A.dylib...[0m[K[2K[2mLocating external symbol file for liboah.dylib...[0m[K[2K[2mParsing symbol table for liboah.dylib...[0m[K[2K[2mParsing symbol table for program...[0m[K[2KCurrent executable set to '/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode/program' (arm64).
+(lldb) [1G[2m(lldb) [0m[8Gbreakpoint set --name CalculateMaxSalary
+Breakpoint 1: where = program`Department::CalculateMaxSalary(Department::StaffTypes) + 32 at Department.cpp:25:9, address = 0x000000010000217c
+(lldb) [1G[2m(lldb) [0m[8Gbreakpoint set --name CalculateAverageSalary
+Breakpoint 2: where = program`Department::CalculateAverageSalary(Department::StaffTypes) + 32 at Department.cpp:70:6, address = 0x00000001000025a4
+(lldb) [1G[2m(lldb) [0m[8Grun
+Process 5678 launched: '/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode/program' (arm64)
+  Here is the List of all the Staff in the R&D Department: 
+  ------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+   Josh   0   Technology Specialist   3000.00      2015
+
+   Mary   0         Project Manager   5500.00      2010
+
+   Marc   0    Research Team Leader   8000.00      2007
+
+   Mike   0        Multimedia Prog.   2500.00      2014
+
+  Julie   0     Mainframe Sys.Prog.   2150.00      2013
+
+ Albert   0                OS Prog.   2300.00      2015
+
+   John   0    Senior Software Eng.   4899.00      2011
+
+ Connor   0      Software Developer   1900.00      2017
+  Here is the List of all the Staff in the IT Department: 
+  ------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+    Roy   0           Network Prog.   1900.00      2016
+
+   Jane   0                  Tester   1500.00      2018
+
+ Removing Mike from the company: Succeeded
+ -------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+   Mary   0         Project Manager   5500.00      2010
+
+  Julie   0     Mainframe Sys.Prog.   2150.00      2013
+
+ Connor   0      Software Developer   1900.00      2017
+
+  Here is the List of all the Programmers who know C++ in the R&D Department: 
+  ---------------------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+  Julie   0     Mainframe Sys.Prog.   2150.00      2013      Mary         5         C++
+
+ Listing All Project IDs:  5 8
+-------------------------
+Process 5678 stopped
+* thread #1, queue = [32m'com.apple.main-thread'[0m, stop reason = [31mbreakpoint 1.1[0m
+    frame #0: [33m0x000000010000217c[0m program`Department::CalculateMaxSalary(this=0x000000016fdff2b0, type=EMPLOYEE) at [36mDepartment.cpp[0m:[33m25[0m:[33m9[0m
+[33m  [0m 22  	
+[33m  [0m 23  	[32mdouble[0m Department::CalculateMaxSalary(StaffTypes type)
+[33m  [0m 24  	{
+[33m->[0m 25  		[32mdouble[0m [4mmax[0m = [31m0[0m;
+[33m  [0m 26  		[32mdouble[0m i = [31m0[0m;
+[33m  [0m 27  		[32mswitch[0m (type)
+[33m  [0m 28  		{
+Target 0: (program) stopped.
+(lldb) [1G[2m(lldb) [0m[8Gframe variable Employees
+(std::vector<Employee> *) Employees = 0x00006000031052c0 size=1
+(lldb) [1G[2m(lldb) [0m[8Gframe variable Programmers
+(std::vector<Programmer> *) Programmers = 0x00006000031052e0 size=1
+(lldb) [1G[2m(lldb) [0m[8Gstep
+Process 5678 stopped
+* thread #1, queue = [32m'com.apple.main-thread'[0m, stop reason = [31mstep in[0m
+    frame #0: [33m0x0000000100002180[0m program`Department::CalculateMaxSalary(this=0x000000016fdff2b0, type=EMPLOYEE) at [36mDepartment.cpp[0m:[33m26[0m:[33m9[0m
+[33m  [0m 23  	[32mdouble[0m Department::CalculateMaxSalary(StaffTypes type)
+[33m  [0m 24  	{
+[33m  [0m 25  		[32mdouble[0m max = [31m0[0m;
+[33m->[0m 26  		[32mdouble[0m [4mi[0m = [31m0[0m;
+[33m  [0m 27  		[32mswitch[0m (type)
+[33m  [0m 28  		{
+[33m  [0m 29  		[32mcase[0m Department::EMPLOYEE:
+Target 0: (program) stopped.
+(lldb) [1G[2m(lldb) [0m[8Gstep
+Process 5678 stopped
+* thread #1, queue = [32m'com.apple.main-thread'[0m, stop reason = [31mstep in[0m
+    frame #0: [33m0x0000000100002184[0m program`Department::CalculateMaxSalary(this=0x000000016fdff2b0, type=EMPLOYEE) at [36mDepartment.cpp[0m:[33m27[0m:[33m10[0m
+[33m  [0m 24  	{
+[33m  [0m 25  		[32mdouble[0m max = [31m0[0m;
+[33m  [0m 26  		[32mdouble[0m i = [31m0[0m;
+[33m->[0m 27  		[32mswitch[0m ([4mtype[0m)
+[33m  [0m 28  		{
+[33m  [0m 29  		[32mcase[0m Department::EMPLOYEE:
+[33m  [0m 30  			[32mfor[0m (i = [31m0[0m; i < Employees->size(); i++)
+Target 0: (program) stopped.
+(lldb) [1G[2m(lldb) [0m[8Gcontinue
+Process 5678 resuming
+The Highest R&D Employee Salary is: 5500.00
+Process 5678 stopped
+* thread #1, queue = [32m'com.apple.main-thread'[0m, stop reason = [31mbreakpoint 1.1[0m
+    frame #0: [33m0x000000010000217c[0m program`Department::CalculateMaxSalary(this=0x000000016fdff2b0, type=PROGRAMMER) at [36mDepartment.cpp[0m:[33m25[0m:[33m9[0m
+[33m  [0m 22  	
+[33m  [0m 23  	[32mdouble[0m Department::CalculateMaxSalary(StaffTypes type)
+[33m  [0m 24  	{
+[33m->[0m 25  		[32mdouble[0m [4mmax[0m = [31m0[0m;
+[33m  [0m 26  		[32mdouble[0m i = [31m0[0m;
+[33m  [0m 27  		[32mswitch[0m (type)
+[33m  [0m 28  		{
+Target 0: (program) stopped.
+(lldb) [1G[2m(lldb) [0m[8Gexit
+Quitting LLDB will kill one or more processes. Do you really want to proceed: [Y /n] y
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mg++ -g -o program main.cpp employeeClass.cp[7mp[27m[K[A[36C[27mg[27m+[27m+[27m [27m-[27mg[27m [27m-[27mo[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[27m [27mm[27ma[27mi[27mn[27m.[27mc[27mp[27mp[27m [27me[27mm[27mp[27ml[27mo[27my[27me[27me[27mC[27ml[27ma[27ms[27ms[27m.[27mc[27mpp[?2004l
+Undefined symbols for architecture arm64:
+  "Department::getAllStaff()", referenced from:
+      _main in main-303697.o
+      _main in main-303697.o
+      _main in main-303697.o
+  "Department::RemoveEmployee(Employee)", referenced from:
+      _main in main-303697.o
+  "Department::getAllProjectIDs()", referenced from:
+      _main in main-303697.o
+  "Department::CalculateMaxSalary(Department::StaffTypes)", referenced from:
+      _main in main-303697.o
+      _main in main-303697.o
+      _main in main-303697.o
+  "Department::CalculateAverageSalary(Department::StaffTypes)", referenced from:
+      _main in main-303697.o
+      _main in main-303697.o
+      _main in main-303697.o
+      _main in main-303697.o
+      _main in main-303697.o
+      _main in main-303697.o
+  "Department::getProgrammersByLanguage(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>)", referenced from:
+      _main in main-303697.o
+  "Department::Department(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, int)", referenced from:
+      _main in main-303697.o
+      _main in main-303697.o
+  "Department::~Department()", referenced from:
+      _main in main-303697.o
+      _main in main-303697.o
+      _main in main-303697.o
+      _main in main-303697.o
+  "Programmer::print()", referenced from:
+      _main in main-303697.o
+  "Programmer::Programmer(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, long, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, double, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>)", referenced from:
+      _main in main-303697.o
+      _main in main-303697.o
+      _main in main-303697.o
+      _main in main-303697.o
+      _main in main-303697.o
+  "SoftwareArchitect::SoftwareArchitect(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, long, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, double, int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, int, int)", referenced from:
+      _main in main-303697.o
+      _main in main-303697.o
+ld: symbol(s) not found for architecture arm64
+clang: [0;1;31merror: [0m[1mlinker command failed with exit code 1 (use -v to see invocation)[0m
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mg++ -g -o program main.cpp employeeClass.cp[7mp[7m Department.cpp Programmer.cpp SoftwareArchitect.cpp[27m[K[A[16D[27mg[27m+[27m+[27m [27m-[27mg[27m [27m-[27mo[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[27m [27mm[27ma[27mi[27mn[27m.[27mc[27mp[27mp[27m [27me[27mm[27mp[27ml[27mo[27my[27me[27me[27mC[27ml[27ma[27ms[27ms[27m.[27mc[27mpp[27m [27mD[27me[27mp[27ma[27mr[27mt[27mm[27me[27mn[27mt[27m.[27mc[27mp[27mp[27m [27mP[27mr[27mo[27mg[27mr[27ma[27mm[27mm[27me[27mr[27m.[27mc[27mp[27mp[27m [27mS[27mo[27mf[27mt[27mw[27ma[27mr[27me[27mA[27mr[27mc[27mh[27mi[27mt[27me[27mc[27mt[27m.[27mc[27mp[27mp[?2004l
+clang: [0;1;31merror: [0m[1mno such file or directory: 'Programmer.cpp'[0m
+clang: [0;1;31merror: [0m[1mno such file or directory: 'SoftwareArchitect.cpp'[0m
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004hg++ -g -o program main.cpp employeeClass.cpp Department.cpp Programmer.cpp SoftwareArchitect.cpp[K[?2004l
+clang: [0;1;31merror: [0m[1mno such file or directory: 'Programmer.cpp'[0m
+clang: [0;1;31merror: [0m[1mno such file or directory: 'SoftwareArchitect.cpp'[0m
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mclang++ *.cpp -g -O0 -o program[27m
+[K[A[37C[27mc[27ml[27ma[27mn[27mg[27m+[27m+[27m [27m*[27m.[27mc[27mp[27mp[27m [27m-[27mg[27m [27m-[27mO[27m0[27m [27m-[27mo[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[1B[K[?2004l
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mbreakpoint set --name Employee::Employee[27m[40D[27mb[27mr[27me[27ma[27mk[27mp[27mo[27mi[27mn[27mt[27m [27ms[27me[27mt[27m [27m-[27m-[27mn[27ma[27mm[27me[27m [27mE[27mm[27mp[27ml[27mo[27my[27me[27me[27m:[27m:[27mE[27mm[27mp[27ml[27mo[27my[27me[27me[?2004l
+zsh: command not found: breakpoint
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mlldb program[27m[12D[27ml[27ml[27md[27mb[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[?2004l
+(lldb) target create "program"
+[2mLocating external symbol file for program...[0m[K[2K[2mLoading Apple DWARF index for program...[0m[K[2K[2mLocating external symbol file for dyld...[0m[K[2K[2mParsing symbol table for dyld...[0m[K[2K[2mLocating external symbol file for libc++.1.dylib...[0m[K[2K[2mParsing symbol table for libc++.1.dylib...[0m[K[2K[2mLocating external symbol file for libSystem.B.dylib...[0m[K[2K[2mParsing symbol table for libSystem.B.dylib...[0m[K[2K[2mLocating external symbol file for libc++abi.dylib...[0m[K[2K[2mParsing symbol table for libc++abi.dylib...[0m[K[2K[2mLocating external symbol file for libcache.dylib...[0m[K[2K[2mParsing symbol table for libcache.dylib...[0m[K[2K[2mLocating external symbol file for libcommonCrypto.dylib...[0m[K[2K[2mParsing symbol table for libcommonCrypto.dylib...[0m[K[2K[2mLocating external symbol file for libcompiler_rt.dylib...[0m[K[2K[2mParsing symbol table for libcompiler_rt.dylib...[0m[K[2K[2mLocating external symbol file for libcopyfile.dylib...[0m[K[2K[2mParsing symbol table for libcopyfile.dylib...[0m[K[2K[2mLocating external symbol file for libcorecrypto.dylib...[0m[K[2K[2mParsing symbol table for libcorecrypto.dylib...[0m[K[2K[2mLocating external symbol file for libdispatch.dylib...[0m[K[2K[2mParsing symbol table for libdispatch.dylib...[0m[K[2K[2mLocating external symbol file for libdyld.dylib...[0m[K[2K[2mParsing symbol table for libdyld.dylib...[0m[K[2K[2mLocating external symbol file for libkeymgr.dylib...[0m[K[2K[2mParsing symbol table for libkeymgr.dylib...[0m[K[2K[2mLocating external symbol file for libmacho.dylib...[0m[K[2K[2mParsing symbol table for libmacho.dylib...[0m[K[2K[2mLocating external symbol file for libquarantine.dylib...[0m[K[2K[2mParsing symbol table for libquarantine.dylib...[0m[K[2K[2mLocating external symbol file for libremovefile.dylib...[0m[K[2K[2mParsing symbol table for libremovefile.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_asl.dylib...[0m[K[2K[2mParsing symbol table for libsystem_asl.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_blocks.dylib...[0m[K[2K[2mParsing symbol table for libsystem_blocks.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_c.dylib...[0m[K[2K[2mParsing symbol table for libsystem_c.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_collections.dylib...[0m[K[2K[2mParsing symbol table for libsystem_collections.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_configuration.dylib...[0m[K[2K[2mParsing symbol table for libsystem_configuration.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_containermanager.dylib...[0m[K[2K[2mParsing symbol table for libsystem_containermanager.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_coreservices.dylib...[0m[K[2K[2mParsing symbol table for libsystem_coreservices.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_darwin.dylib...[0m[K[2K[2mParsing symbol table for libsystem_darwin.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_darwindirectory.dylib...[0m[K[2K[2mParsing symbol table for libsystem_darwindirectory.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_dnssd.dylib...[0m[K[2K[2mParsing symbol table for libsystem_dnssd.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_featureflags.dylib...[0m[K[2K[2mParsing symbol table for libsystem_featureflags.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_info.dylib...[0m[K[2K[2mParsing symbol table for libsystem_info.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_m.dylib...[0m[K[2K[2mParsing symbol table for libsystem_m.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_malloc.dylib...[0m[K[2K[2mParsing symbol table for libsystem_malloc.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_networkextension.dylib...[0m[K[2K[2mParsing symbol table for libsystem_networkextension.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_notify.dylib...[0m[K[2K[2mParsing symbol table for libsystem_notify.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_sandbox.dylib...[0m[K[2K[2mParsing symbol table for libsystem_sandbox.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_secinit.dylib...[0m[K[2K[2mParsing symbol table for libsystem_secinit.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_kernel.dylib...[0m[K[2K[2mParsing symbol table for libsystem_kernel.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_platform.dylib...[0m[K[2K[2mParsing symbol table for libsystem_platform.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_pthread.dylib...[0m[K[2K[2mParsing symbol table for libsystem_pthread.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_symptoms.dylib...[0m[K[2K[2mParsing symbol table for libsystem_symptoms.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_trace.dylib...[0m[K[2K[2mParsing symbol table for libsystem_trace.dylib...[0m[K[2K[2mLocating external symbol file for libunwind.dylib...[0m[K[2K[2mParsing symbol table for libunwind.dylib...[0m[K[2K[2mLocating external symbol file for libxpc.dylib...[0m[K[2K[2mParsing symbol table for libxpc.dylib...[0m[K[2K[2mLocating external symbol file for libobjc.A.dylib...[0m[K[2K[2mParsing symbol table for libobjc.A.dylib...[0m[K[2K[2mLocating external symbol file for liboah.dylib...[0m[K[2K[2mParsing symbol table for liboah.dylib...[0m[K[2K[2mParsing symbol table for program...[0m[K[2KCurrent executable set to '/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode/program' (arm64).
+(lldb) [1G[2m(lldb) [0m[8Gbreakpoint set --name Employee::Employee
+Breakpoint 1: 6 locations.
+(lldb) [1G[2m(lldb) [0m[8Gbreakpoint set --name Employee::print
+Breakpoint 2: where = program`Employee::print() + 32 at employeeClass.cpp:51:10, address = 0x000000010000be84
+(lldb) [1G[2m(lldb) [0m[8Grun
+Process 11130 launched: '/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode/program' (arm64)
+Process 11130 stopped
+* thread #1, queue = [32m'com.apple.main-thread'[0m, stop reason = [31mbreakpoint 1.5[0m
+    frame #0: [33m0x000000010000bd88[0m program`Employee::Employee(this=0x000000016fdff1d0, nme="Josh", id=1, jbTtle="Technology Specialist", slry=3000, yr=2015) at [36memployeeClass.cpp[0m:[33m13[0m:[33m76[0m
+[33m  [0m 10  	}
+[33m  [0m 11  	
+[33m  [0m 12  	[35m/* Constructor w/ parameters */[0m
+[33m->[0m 13  	Employee::Employee(string nme, [32mint[0m id, string jbTtle, [32mdouble[0m slry, [32mint[0m yr) [4m{[0m
+[33m  [0m 14  		name = nme;
+[33m  [0m 15  	
+[33m  [0m 16  	    [32mif[0m (id > [31m0[0m)
+Target 0: (program) stopped.
+(lldb) [1G[2m(lldb) [0m[8Gframe variable
+(Employee *) this = 0x000000016fdff1d0
+(std::string) nme = "Josh"
+(int) id = 1
+(std::string) jbTtle = "Technology Specialist"
+(double) slry = 3000
+(int) yr = 2015
+(lldb) [1G[2m(lldb) [0m[8Gexit
+Quitting LLDB will kill one or more processes. Do you really want to proceed: [Y /n] y
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mclang++ *.cpp  -o program[27m[25D[27mc[27ml[27ma[27mn[27mg[27m+[27m+[27m [27m*[27m.[27mc[27mp[27mp[27m [27m [27m-[27mo[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[?2004l
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004hllldb program[?2004l
+(lldb) target create "program"
+[2mLocating external symbol file for program...[0m[K[2K[2mParsing symbol table for program...[0m[K[2K[2mLocating external symbol file for dyld...[0m[K[2K[2mParsing symbol table for dyld...[0m[K[2K[2mLocating external symbol file for libc++.1.dylib...[0m[K[2K[2mParsing symbol table for libc++.1.dylib...[0m[K[2K[2mLocating external symbol file for libSystem.B.dylib...[0m[K[2K[2mParsing symbol table for libSystem.B.dylib...[0m[K[2K[2mLocating external symbol file for libc++abi.dylib...[0m[K[2K[2mParsing symbol table for libc++abi.dylib...[0m[K[2K[2mLocating external symbol file for libcache.dylib...[0m[K[2K[2mParsing symbol table for libcache.dylib...[0m[K[2K[2mLocating external symbol file for libcommonCrypto.dylib...[0m[K[2K[2mParsing symbol table for libcommonCrypto.dylib...[0m[K[2K[2mLocating external symbol file for libcompiler_rt.dylib...[0m[K[2K[2mParsing symbol table for libcompiler_rt.dylib...[0m[K[2K[2mLocating external symbol file for libcopyfile.dylib...[0m[K[2K[2mParsing symbol table for libcopyfile.dylib...[0m[K[2K[2mLocating external symbol file for libcorecrypto.dylib...[0m[K[2K[2mParsing symbol table for libcorecrypto.dylib...[0m[K[2K[2mLocating external symbol file for libdispatch.dylib...[0m[K[2K[2mParsing symbol table for libdispatch.dylib...[0m[K[2K[2mLocating external symbol file for libdyld.dylib...[0m[K[2K[2mParsing symbol table for libdyld.dylib...[0m[K[2K[2mLocating external symbol file for libkeymgr.dylib...[0m[K[2K[2mParsing symbol table for libkeymgr.dylib...[0m[K[2K[2mLocating external symbol file for libmacho.dylib...[0m[K[2K[2mParsing symbol table for libmacho.dylib...[0m[K[2K[2mLocating external symbol file for libquarantine.dylib...[0m[K[2K[2mParsing symbol table for libquarantine.dylib...[0m[K[2K[2mLocating external symbol file for libremovefile.dylib...[0m[K[2K[2mParsing symbol table for libremovefile.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_asl.dylib...[0m[K[2K[2mParsing symbol table for libsystem_asl.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_blocks.dylib...[0m[K[2K[2mParsing symbol table for libsystem_blocks.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_c.dylib...[0m[K[2K[2mParsing symbol table for libsystem_c.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_collections.dylib...[0m[K[2K[2mParsing symbol table for libsystem_collections.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_configuration.dylib...[0m[K[2K[2mParsing symbol table for libsystem_configuration.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_containermanager.dylib...[0m[K[2K[2mParsing symbol table for libsystem_containermanager.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_coreservices.dylib...[0m[K[2K[2mParsing symbol table for libsystem_coreservices.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_darwin.dylib...[0m[K[2K[2mParsing symbol table for libsystem_darwin.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_darwindirectory.dylib...[0m[K[2K[2mParsing symbol table for libsystem_darwindirectory.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_dnssd.dylib...[0m[K[2K[2mParsing symbol table for libsystem_dnssd.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_featureflags.dylib...[0m[K[2K[2mParsing symbol table for libsystem_featureflags.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_info.dylib...[0m[K[2K[2mParsing symbol table for libsystem_info.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_m.dylib...[0m[K[2K[2mParsing symbol table for libsystem_m.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_malloc.dylib...[0m[K[2K[2mParsing symbol table for libsystem_malloc.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_networkextension.dylib...[0m[K[2K[2mParsing symbol table for libsystem_networkextension.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_notify.dylib...[0m[K[2K[2mParsing symbol table for libsystem_notify.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_sandbox.dylib...[0m[K[2K[2mParsing symbol table for libsystem_sandbox.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_secinit.dylib...[0m[K[2K[2mParsing symbol table for libsystem_secinit.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_kernel.dylib...[0m[K[2K[2mParsing symbol table for libsystem_kernel.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_platform.dylib...[0m[K[2K[2mParsing symbol table for libsystem_platform.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_pthread.dylib...[0m[K[2K[2mParsing symbol table for libsystem_pthread.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_symptoms.dylib...[0m[K[2K[2mParsing symbol table for libsystem_symptoms.dylib...[0m[K[2K[2mLocating external symbol file for libsystem_trace.dylib...[0m[K[2K[2mParsing symbol table for libsystem_trace.dylib...[0m[K[2K[2mLocating external symbol file for libunwind.dylib...[0m[K[2K[2mParsing symbol table for libunwind.dylib...[0m[K[2K[2mLocating external symbol file for libxpc.dylib...[0m[K[2K[2mParsing symbol table for libxpc.dylib...[0m[K[2K[2mLocating external symbol file for libobjc.A.dylib...[0m[K[2K[2mParsing symbol table for libobjc.A.dylib...[0m[K[2K[2mLocating external symbol file for liboah.dylib...[0m[K[2K[2mParsing symbol table for liboah.dylib...[0m[K[2KCurrent executable set to '/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode/program' (arm64).
+(lldb) [1G[2m(lldb) [0m[8Gb Programmer::Programmer(std::__1::basic_string<char>, long, std::__1::ba sic_string<char>, double, int, std::__1::basic_string<char>, int, std::__1::basi c_string<char>)
+Breakpoint 1: no locations (pending).
+WARNING:  Unable to resolve breakpoint to any actual locations.
+(lldb) [1G[2m(lldb) [0m[8Gb SoftwareArchitect::print
+Breakpoint 2: where = program`SoftwareArchitect::print(), address = 0x0000000100011b38
+(lldb) [1G[2m(lldb) [0m[8Grun
+Process 18850 launched: '/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode/program' (arm64)
+  Here is the List of all the Staff in the R&D Department: 
+  ------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+   Josh   1   Technology Specialist   3000.00      2015
+
+   Mary   2         Project Manager   5500.00      2010
+
+   Marc   3    Research Team Leader   8000.00      2007
+
+   Mike  11        Multimedia Prog.   2500.00      2014
+
+  Julie  12     Mainframe Sys.Prog.   2150.00      2013
+
+ Albert  13                OS Prog.   2300.00      2015
+
+   John  21    Senior Software Eng.   4899.00      2011
+
+ Connor  24      Software Developer   1900.00      2017
+  Here is the List of all the Staff in the IT Department: 
+  ------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+    Roy  32           Network Prog.   1900.00      2016
+
+   Jane  35                  Tester   1500.00      2018
+
+ Removing Mike from the company: Succeeded
+ -------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+   Josh   1   Technology Specialist   3000.00      2015
+
+   Mary   2         Project Manager   5500.00      2010
+
+   Marc   3    Research Team Leader   8000.00      2007
+
+  Julie  12     Mainframe Sys.Prog.   2150.00      2013
+
+ Albert  13                OS Prog.   2300.00      2015
+
+   John  21    Senior Software Eng.   4899.00      2011
+
+ Connor  24      Software Developer   1900.00      2017
+
+  Here is the List of all the Programmers who know C++ in the R&D Department: 
+  ---------------------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+  Julie  12     Mainframe Sys.Prog.   2150.00      2013      Mary         5         C++
+
+ Albert  13                OS Prog.   2300.00      2015      Mary         9         C++
+
+ Listing All Project IDs:  5 9 6 8
+-------------------------
+The Highest R&D Employee Salary is: 8000.00
+The Highest R&D Programmer Salary is: 2300.00
+The Highest R&D Software Architect Salary is: 1900.00
+
+The Average R&D Employee Salary is: 2666
+The Average R&D Programmer Salary is: 1150
+The Average R&D Software Architect Salary is: 3399
+
+The Average IT Employee Salary is: 0
+The Average IT Programmer Salary is: 750
+The Average IT Software Architect Salary is: 0
+
+Process 18850 exited with status = 0 (0x00000000) 
+(lldb) [1G[2m(lldb) [0m[8Gexit
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mclang++ -g -O0 *.cpp -o program[27m[31D[27mc[27ml[27ma[27mn[27mg[27m+[27m+[27m [27m-[27mg[27m [27m-[27mO[27m0[27m [27m*[27m.[27mc[27mp[27mp[27m [27m-[27mo[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[?2004l
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mls -l program[27m[13D[27ml[27ms[27m [27m-[27ml[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[?2004l
+-rwxr-xr-x  1 jiagao  staff  243720 Jan 23 12:20 program
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mclang++ *.cpp -g -O1 -o program[27m[31D[27mc[27ml[27ma[27mn[27mg[27m+[27m+[27m [27m*[27m.[27mc[27mp[27mp[27m [27m-[27mg[27m [27m-[27mO[27m1[27m [27m-[27mo[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[?2004l
+^[[A[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004hclang++ *.cpp -g -O1 -o program[31Dls -l program                  [18D[?2004l
+-rwxr-xr-x  1 jiagao  staff  70408 Jan 23 12:20 program
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7mclang++ *.cpp -g -O2 -o program[27m[31D[27mc[27ml[27ma[27mn[27mg[27m+[27m+[27m [27m*[27m.[27mc[27mp[27mp[27m [27m-[27mg[27m [27m-[27mO[27m2[27m [27m-[27mo[27m [27mp[27mr[27mo[27mg[27mr[27ma[27mm[?2004l
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004hclang++ *.cpp -g -O2 -o program[31Dls -l program                  [18D[?2004l
+-rwxr-xr-x  1 jiagao  staff  70408 Jan 23 12:20 program
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h[7m./program[27m[9D[27m.[27m/[27mp[27mr[27mo[27mg[27mr[27ma[27mm[?2004l
+  Here is the List of all the Staff in the R&D Department: 
+  ------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+   Josh   1   Technology Specialist   3000.00      2015
+
+   Mary   2         Project Manager   5500.00      2010
+
+   Marc   3    Research Team Leader   8000.00      2007
+
+   Mike  11        Multimedia Prog.   2500.00      2014
+
+  Julie  12     Mainframe Sys.Prog.   2150.00      2013
+
+ Albert  13                OS Prog.   2300.00      2015
+
+   John  21    Senior Software Eng.   4899.00      2011
+
+ Connor  24      Software Developer   1900.00      2017
+  Here is the List of all the Staff in the IT Department: 
+  ------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+    Roy  32           Network Prog.   1900.00      2016
+
+   Jane  35                  Tester   1500.00      2018
+
+ Removing Mike from the company: Succeeded
+ -------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+   Josh   1   Technology Specialist   3000.00      2015
+
+   Mary   2         Project Manager   5500.00      2010
+
+   Marc   3    Research Team Leader   8000.00      2007
+
+  Julie  12     Mainframe Sys.Prog.   2150.00      2013
+
+ Albert  13                OS Prog.   2300.00      2015
+
+   John  21    Senior Software Eng.   4899.00      2011
+
+ Connor  24      Software Developer   1900.00      2017
+
+  Here is the List of all the Programmers who know C++ in the R&D Department: 
+  ---------------------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+  Julie  12     Mainframe Sys.Prog.   2150.00      2013      Mary         5         C++
+
+ Albert  13                OS Prog.   2300.00      2015      Mary         9         C++
+
+ Listing All Project IDs:  5 9 6 8
+-------------------------
+The Highest R&D Employee Salary is: 8000.00
+The Highest R&D Programmer Salary is: 2300.00
+The Highest R&D Software Architect Salary is: 1900.00
+
+The Average R&D Employee Salary is: 2666
+The Average R&D Programmer Salary is: 1150
+The Average R&D Software Architect Salary is: 3399
+
+The Average IT Employee Salary is: 0
+The Average IT Programmer Salary is: 750
+The Average IT Software Architect Salary is: 0
+
+[1m[7m%[27m[1m[0m                                                                                ]7;file://dhcp-10-18-78-168.uconnect.utah.edu/Users/jiagao/repository_jia/MSD_JIA/CS6015/lab2/buggyCode[0m[27m[24m[Jjiagao@dhcp-10-18-78-168 buggyCode % [K[?2004h
