@@ -1,20 +1,22 @@
+CXX = clang++
+CXXFLAGS = -std=c++11 -Wall -Wextra
 
-CXX = g++
 all: tests
 
-#build the executable
-tests: exp.o tests.o
-	$(CXX) -o tests exp.o tests.o
+# Build the executable
+tests: exp.o test.o
+	$(CXX) $(CXXFLAGS) -o tests exp.o test.o
 
-#compile exp.cpp
+# Compile exp.cpp
 exp.o: exp.cpp exp.h
-	$(CXX) -c exp.cpp
+	$(CXX) $(CXXFLAGS) -c exp.cpp
 
-#compile tests.cpp
-tests.o: tests.cpp exp.h
-	$(CXX) -c tests.cpp
+# Compile tests.cpp
+test.o: test.cpp exp.h
+	$(CXX) $(CXXFLAGS) -c test.cpp
 
 # Clean
+clean:
 	rm -f *.o tests
 
 .PHONY: all clean

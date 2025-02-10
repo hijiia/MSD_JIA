@@ -19,11 +19,11 @@ private:
     int val;
 
 public:
-    Num(int val);
+    Num(int val) : val(val) {}
     bool equals(Expr *e) override;
-    int interp() override;
-    bool has_variable() override;
-    Expr* subst(const std::string& variable, Expr* replacement) override;
+    int interp() override { return val; }
+    bool has_variable() override { return false; }
+    Expr* subst(const std::string& variable, Expr* replacement) override { return new Num(val); }
 };
 
 class Add : public Expr {
@@ -32,11 +32,13 @@ private:
     Expr *rhs;
 
 public:
-    Add(Expr *lhs, Expr *rhs);
+    Add(Expr *lhs, Expr *rhs) : lhs(lhs), rhs(rhs) {}
     bool equals(Expr *e) override;
-    int interp() override;
-    bool has_variable() override;
-    Expr* subst(const std::string& variable, Expr* replacement) override;
+    int interp() override { return lhs->interp() + rhs->interp(); }
+    bool has_variable() override { return lhs->has_variable() || rhs->has_variable(); }
+    Expr* subst(const std::string& variable, Expr* replacement) override {
+        return new Add(lhs->subst(variable, replacement), rhs->subst(variable, replacement));
+    }
 };
 
 class Mult : public Expr {
@@ -45,11 +47,13 @@ private:
     Expr *rhs;
 
 public:
-    Mult(Expr *lhs, Expr *rhs);
+    Mult(Expr *lhs, Expr *rhs) : lhs(lhs), rhs(rhs) {}
     bool equals(Expr *e) override;
-    int interp() override;
-    bool has_variable() override;
-    Expr* subst(const std::string& variable, Expr* replacement) override;
+    int interp() override { return lhs->interp() * rhs->interp(); }
+    bool has_variable() override { return lhs->has_variable() || rhs->has_variable(); }
+    Expr* subst(const std::string& variable, Expr* replacement) override {
+        return new Mult(lhs->subst(variable, replacement), rhs->subst(variable, replacement));
+    }
 };
 
 class VarExpr : public Expr {
@@ -57,11 +61,18 @@ private:
     std::string name;
 
 public:
-    VarExpr(const std::string &name);
+    VarExpr(const std::string &name) : name(name) {}
     bool equals(Expr *e) override;
-    int interp() override;
-    bool has_variable() override;
-    Expr* subst(const std::string& variable, Expr* replacement) override;
+    int interp() override { throw std::runtime_error("Variable has no value"); }
+    bool has_variable() override { return true; }
+    Expr* subst(const std::string& variable, Expr* replacement) override {
+        if (name == variable) {
+            return replacement;
+        } else {
+            return new VarExpr(name);
+        }
+    }
+    ~VarExpr() = default; // Ensure the destructor matches the base class
 };
 
 #endif // EXP_H
