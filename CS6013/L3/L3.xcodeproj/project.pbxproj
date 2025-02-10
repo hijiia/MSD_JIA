@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		176FBC492D5180D1007C33E9 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 176FBC482D5180D1007C33E9 /* main.c */; };
+		176FBC512D518187007C33E9 /* forkWait.c in Sources */ = {isa = PBXBuildFile; fileRef = 176FBC502D518187007C33E9 /* forkWait.c */; };
+		176FBC542D5181B1007C33E9 /* pipe.c in Sources */ = {isa = PBXBuildFile; fileRef = 176FBC532D5181B1007C33E9 /* pipe.c */; };
+		176FBC572D51823B007C33E9 /* signal.c in Sources */ = {isa = PBXBuildFile; fileRef = 176FBC562D51823B007C33E9 /* signal.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +26,9 @@
 
 /* Begin PBXFileReference section */
 		176FBC452D5180D1007C33E9 /* L3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = L3; sourceTree = BUILT_PRODUCTS_DIR; };
-		176FBC482D5180D1007C33E9 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		176FBC502D518187007C33E9 /* forkWait.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = forkWait.c; sourceTree = "<group>"; };
+		176FBC532D5181B1007C33E9 /* pipe.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pipe.c; sourceTree = "<group>"; };
+		176FBC562D51823B007C33E9 /* signal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = signal.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +61,9 @@
 		176FBC472D5180D1007C33E9 /* L3 */ = {
 			isa = PBXGroup;
 			children = (
-				176FBC482D5180D1007C33E9 /* main.c */,
+				176FBC502D518187007C33E9 /* forkWait.c */,
+				176FBC532D5181B1007C33E9 /* pipe.c */,
+				176FBC562D51823B007C33E9 /* signal.c */,
 			);
 			path = L3;
 			sourceTree = "<group>";
@@ -119,7 +125,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				176FBC492D5180D1007C33E9 /* main.c in Sources */,
+				176FBC572D51823B007C33E9 /* signal.c in Sources */,
+				176FBC512D518187007C33E9 /* forkWait.c in Sources */,
+				176FBC542D5181B1007C33E9 /* pipe.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
