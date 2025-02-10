@@ -1,7 +1,6 @@
 //
 //  cmdline.cpp
 //  Phase1
-//
 #define CATCH_CONFIG_RUNNER
 #include "catch.h"
 #include "cmdline.h"
