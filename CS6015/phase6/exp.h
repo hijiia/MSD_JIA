@@ -1,0 +1,136 @@
+#ifndef EXP_H
+#define EXP_H
+
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <stdexcept>
+
+typedef enum {
+    prec_none,      // = 0
+    prec_add,       // = 1
+    prec_mult       // = 2
+} precedence_t;
+
+// Base class for expressions
+class Expr {
+public:
+    // Virtual destructor
+    virtual ~Expr() = default;
+
+    // Pure virtual methods
+    virtual bool equals(Expr* e) = 0; // Check if two expressions are equal
+    virtual int interp() = 0;        // Interpret the expression to a value
+    virtual bool has_variable() = 0; // Check if the expression contains a variable
+    virtual Expr* subst(const std::string& variable, Expr* replacement) = 0; // Substitute a variable with an expression
+
+    // Print the expression to an output stream
+    virtual void printExp(std::ostream& ot) const = 0;
+
+    // Convert the expression to a string
+    std::string to_string() const;
+
+    // Pretty-print the expression to an output stream
+    void pretty_print(std::ostream& ot) const;
+
+    // Convert the pretty-printed expression to a string
+    std::string to_pretty_string() const;
+
+    // Helper method for pretty-printing with precedence
+    virtual void pretty_print_at(std::ostream& ot, precedence_t prec) const = 0;
+};
+
+// Number expression
+class Num : public Expr {
+public:
+    int val; // The value of the number
+
+    Num(int val); // Constructor
+    bool equals(Expr* e) override; // Override equals
+    int interp() override;         // Override interp
+    bool has_variable() override;  // Override has_variable
+    Expr* subst(const std::string& variable, Expr* replacement) override; // Override subst
+
+    void printExp(std::ostream& ot) const override; // Override printExp
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override; // Override pretty_print_at
+};
+
+// Addition expression
+class Add : public Expr {
+public:
+    Expr* lhs; // Left-hand side of the addition
+    Expr* rhs; // Right-hand side of the addition
+
+    Add(Expr* lhs, Expr* rhs); // Constructor
+    bool equals(Expr* e) override; // Override equals
+    int interp() override;         // Override interp
+    bool has_variable() override;  // Override has_variable
+    Expr* subst(const std::string& variable, Expr* replacement) override; // Override subst
+
+    void printExp(std::ostream& ot) const override; // Override printExp
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override; // Override pretty_print_at
+};
+
+// Multiplication expression
+class Mult : public Expr {
+public:
+    Expr* lhs; // Left-hand side of the multiplication
+    Expr* rhs; // Right-hand side of the multiplication
+
+    Mult(Expr* lhs, Expr* rhs); // Constructor
+    bool equals(Expr* e) override; // Override equals
+    int interp() override;         // Override interp
+    bool has_variable() override;  // Override has_variable
+    Expr* subst(const std::string& variable, Expr* replacement) override; // Override subst
+
+    void printExp(std::ostream& ot) const override; // Override printExp
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override; // Override pretty_print_at
+};
+
+// Variable expression
+class VarExpr : public Expr {
+public:
+    std::string name; // The name of the variable
+
+    VarExpr(const std::string& name); // Constructor
+    bool equals(Expr* e) override; // Override equals
+    int interp() override;         // Override interp
+    bool has_variable() override;  // Override has_variable
+    Expr* subst(const std::string& variable, Expr* replacement) override; // Override subst
+
+    void printExp(std::ostream& ot) const override; // Override printExp
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override; // Override pretty_print_at
+};
+
+// Let Expression
+class LetExpr : public Expr {
+public:
+    std::string var; // The variable being assigned
+    Expr* rhs;       // The right-hand side expression
+    Expr* body;      // The body where the variable is used
+
+    LetExpr(const std::string& var, Expr* rhs, Expr* body); // Constructor
+    ~LetExpr(); // Destructor to clean up dynamically allocated expressions
+
+    bool equals(Expr* e) override; // Override equals
+    int interp() override;         // Override interp
+    bool has_variable() override;  // Override has_variable
+    Expr* subst(const std::string& variable, Expr* replacement) override; // Override subst
+
+    void printExp(std::ostream& ot) const override; // Override printExp
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override; // Override pretty_print_at
+};
+
+
+//parsing
+
+Expr* parse(std::istream &in);
+Expr* parse_str(const std::string &s);
+Expr* parse_expr(std::istream &in);
+Expr* parse_addend(std::istream &in);
+Expr* parse_mult(std::istream &in);
+Expr* parse_var(std::istream &in);
+Expr* parse_num(std::istream &in);
+void consume_whitespace(std::istream &in);
+
+#endif // EXP_H
