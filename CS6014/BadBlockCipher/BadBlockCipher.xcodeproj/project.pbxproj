@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1780B13C2D5D8AF300229CA1 /* shelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1780B13B2D5D8AF300229CA1 /* shelpers.cpp */; };
-		1780B13F2D5D8C5F00229CA1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1780B13D2D5D8C5F00229CA1 /* main.cpp */; };
+		17214A772D7BAFDA00EF738A /* BadBlockCipher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17214A752D7BAFDA00EF738A /* BadBlockCipher.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1780B12E2D5D2C9400229CA1 /* CopyFiles */ = {
+		17214A692D7BAFB100EF738A /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -24,14 +23,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1780B1302D5D2C9400229CA1 /* unix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = unix; sourceTree = BUILT_PRODUCTS_DIR; };
-		1780B13A2D5D2CE000229CA1 /* shelpers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shelpers.hpp; sourceTree = "<group>"; };
-		1780B13B2D5D8AF300229CA1 /* shelpers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shelpers.cpp; sourceTree = "<group>"; };
-		1780B13D2D5D8C5F00229CA1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		17214A6B2D7BAFB100EF738A /* BadBlockCipher */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BadBlockCipher; sourceTree = BUILT_PRODUCTS_DIR; };
+		17214A752D7BAFDA00EF738A /* BadBlockCipher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BadBlockCipher.cpp; sourceTree = "<group>"; };
+		17214A762D7BAFDA00EF738A /* BadBlockCipher.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BadBlockCipher.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1780B12D2D5D2C9400229CA1 /* Frameworks */ = {
+		17214A682D7BAFB100EF738A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,67 +39,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1780B1272D5D2C9300229CA1 = {
+		17214A622D7BAFB100EF738A = {
 			isa = PBXGroup;
 			children = (
-				1780B1322D5D2C9400229CA1 /* unix */,
-				1780B1312D5D2C9400229CA1 /* Products */,
+				17214A6D2D7BAFB100EF738A /* BadBlockCipher */,
+				17214A6C2D7BAFB100EF738A /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		1780B1312D5D2C9400229CA1 /* Products */ = {
+		17214A6C2D7BAFB100EF738A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1780B1302D5D2C9400229CA1 /* unix */,
+				17214A6B2D7BAFB100EF738A /* BadBlockCipher */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1780B1322D5D2C9400229CA1 /* unix */ = {
+		17214A6D2D7BAFB100EF738A /* BadBlockCipher */ = {
 			isa = PBXGroup;
 			children = (
-				1780B13A2D5D2CE000229CA1 /* shelpers.hpp */,
-				1780B13B2D5D8AF300229CA1 /* shelpers.cpp */,
-				1780B13D2D5D8C5F00229CA1 /* main.cpp */,
+				17214A752D7BAFDA00EF738A /* BadBlockCipher.cpp */,
+				17214A762D7BAFDA00EF738A /* BadBlockCipher.hpp */,
 			);
-			path = unix;
+			path = BadBlockCipher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1780B12F2D5D2C9400229CA1 /* unix */ = {
+		17214A6A2D7BAFB100EF738A /* BadBlockCipher */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1780B1372D5D2C9400229CA1 /* Build configuration list for PBXNativeTarget "unix" */;
+			buildConfigurationList = 17214A722D7BAFB100EF738A /* Build configuration list for PBXNativeTarget "BadBlockCipher" */;
 			buildPhases = (
-				1780B12C2D5D2C9400229CA1 /* Sources */,
-				1780B12D2D5D2C9400229CA1 /* Frameworks */,
-				1780B12E2D5D2C9400229CA1 /* CopyFiles */,
+				17214A672D7BAFB100EF738A /* Sources */,
+				17214A682D7BAFB100EF738A /* Frameworks */,
+				17214A692D7BAFB100EF738A /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = unix;
-			productName = unix;
-			productReference = 1780B1302D5D2C9400229CA1 /* unix */;
+			name = BadBlockCipher;
+			productName = BadBlockCipher;
+			productReference = 17214A6B2D7BAFB100EF738A /* BadBlockCipher */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		1780B1282D5D2C9300229CA1 /* Project object */ = {
+		17214A632D7BAFB100EF738A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
-					1780B12F2D5D2C9400229CA1 = {
+					17214A6A2D7BAFB100EF738A = {
 						CreatedOnToolsVersion = 15.4;
 					};
 				};
 			};
-			buildConfigurationList = 1780B12B2D5D2C9400229CA1 /* Build configuration list for PBXProject "unix" */;
+			buildConfigurationList = 17214A662D7BAFB100EF738A /* Build configuration list for PBXProject "BadBlockCipher" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -109,30 +107,29 @@
 				en,
 				Base,
 			);
-			mainGroup = 1780B1272D5D2C9300229CA1;
-			productRefGroup = 1780B1312D5D2C9400229CA1 /* Products */;
+			mainGroup = 17214A622D7BAFB100EF738A;
+			productRefGroup = 17214A6C2D7BAFB100EF738A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1780B12F2D5D2C9400229CA1 /* unix */,
+				17214A6A2D7BAFB100EF738A /* BadBlockCipher */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1780B12C2D5D2C9400229CA1 /* Sources */ = {
+		17214A672D7BAFB100EF738A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1780B13F2D5D8C5F00229CA1 /* main.cpp in Sources */,
-				1780B13C2D5D8AF300229CA1 /* shelpers.cpp in Sources */,
+				17214A772D7BAFDA00EF738A /* BadBlockCipher.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		1780B1352D5D2C9400229CA1 /* Debug */ = {
+		17214A702D7BAFB100EF738A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -190,10 +187,12 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		1780B1362D5D2C9400229CA1 /* Release */ = {
+		17214A712D7BAFB100EF738A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -244,47 +243,50 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
 		};
-		1780B1382D5D2C9400229CA1 /* Debug */ = {
+		17214A732D7BAFB100EF738A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		1780B1392D5D2C9400229CA1 /* Release */ = {
+		17214A742D7BAFB100EF738A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1780B12B2D5D2C9400229CA1 /* Build configuration list for PBXProject "unix" */ = {
+		17214A662D7BAFB100EF738A /* Build configuration list for PBXProject "BadBlockCipher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1780B1352D5D2C9400229CA1 /* Debug */,
-				1780B1362D5D2C9400229CA1 /* Release */,
+				17214A702D7BAFB100EF738A /* Debug */,
+				17214A712D7BAFB100EF738A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1780B1372D5D2C9400229CA1 /* Build configuration list for PBXNativeTarget "unix" */ = {
+		17214A722D7BAFB100EF738A /* Build configuration list for PBXNativeTarget "BadBlockCipher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1780B1382D5D2C9400229CA1 /* Debug */,
-				1780B1392D5D2C9400229CA1 /* Release */,
+				17214A732D7BAFB100EF738A /* Debug */,
+				17214A742D7BAFB100EF738A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 1780B1282D5D2C9300229CA1 /* Project object */;
+	rootObject = 17214A632D7BAFB100EF738A /* Project object */;
 }

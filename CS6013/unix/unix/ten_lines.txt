@@ -1,0 +1,10 @@
+    38	    int pos = 0;
+    39	    int space;
+    40	    // Split on spaces:
+    41	    while ((space = s.find(' ', pos)) != string::npos) {
+    42	        string word = s.substr(pos, space - pos);
+    43	        if (!word.empty()) {
+    44	            ret.push_back(word);
+    45	        }
+    46	        pos = space + 1;
+    47	    }
