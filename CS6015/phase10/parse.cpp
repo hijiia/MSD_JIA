@@ -5,17 +5,6 @@
 #include "expr.h"
 #include "parse.hpp"
 
-Expr* parse_expr(std::istream& in);
-Expr* parse_add(std::istream& in);
-Expr* parse_mult(std::istream& in);
-Expr* parse_primary(std::istream& in);
-Expr* parse_num(std::istream& in);
-Expr* parse_bool(std::istream& in);
-Expr* parse_let(std::istream& in);
-Expr* parse_if(std::istream& in);
-Expr* parse_fun(std::istream& in);
-Expr* parse_call(Expr* fun, std::istream& in);
-
 void consume(std::istream& in, char expect) {
     char c = in.get();
     if (c != expect) {
@@ -30,39 +19,41 @@ void skip_whitespace(std::istream& in) {
 Expr* parse_num(std::istream& in) {
     int n = 0;
     bool negative = false;
-
+    
     if (in.peek() == '-') {
         negative = true;
-        consume(in, '-');
-        if (!isdigit(in.peek())) {
-            throw std::runtime_error("invalid input");
-        }
+        in.get();
     }
-
+    
+    if (!isdigit(in.peek())) {
+        throw std::runtime_error("invalid number");
+    }
+    
     while (isdigit(in.peek())) {
-        int c = in.get() - '0';
-        n = n * 10 + c;
+        n = n * 10 + (in.get() - '0');
     }
-
-    if (negative) n = -n;
-    return new NumExpr(n);
+    
+    return new NumExpr(negative ? -n : n);
 }
+
+Expr* parse_var(std::istream& in) {
+    std::string var;
+    while (isalpha(in.peek()) || in.peek() == '_') {
+        var += in.get();
+    }
+    return new VarExpr(var);
+}
+
 
 Expr* parse_bool(std::istream& in) {
     std::string token;
     while (isalpha(in.peek()) || in.peek() == '_') {
-        token.push_back(in.get());
+        token += in.get();
     }
 
-    if (token == "_true") {
-        return new BoolExpr(true);
-    }
-    else if (token == "_false") {
-        return new BoolExpr(false);
-    }
-    else {
-        return new VarExpr(token);
-    }
+    if (token == "_true") return new BoolExpr(true);
+    if (token == "_false") return new BoolExpr(false);
+    throw std::runtime_error("invalid input");
 }
 
 Expr* parse_fun(std::istream& in) {
@@ -72,7 +63,7 @@ Expr* parse_fun(std::istream& in) {
     
     std::string arg;
     while (isalpha(in.peek())) {
-        arg.push_back(in.get());
+        arg += in.get();
     }
     
     skip_whitespace(in);
@@ -89,16 +80,8 @@ Expr* parse_call(Expr* fun, std::istream& in) {
     Expr* arg = parse_expr(in);
     skip_whitespace(in);
     consume(in, ')');
-    
-    // Handle chained calls like f(x)(y)
-    skip_whitespace(in);
-    if (in.peek() == '(') {
-        return parse_call(new CallExpr(fun, arg), in);
-    }
-    
     return new CallExpr(fun, arg);
 }
-
 Expr* parse_primary(std::istream& in) {
     skip_whitespace(in);
     char c = in.peek();
@@ -106,117 +89,148 @@ Expr* parse_primary(std::istream& in) {
     if (isdigit(c) || c == '-') {
         return parse_num(in);
     }
-    else if (isalpha(c) || c == '_') {
-        std::streampos pos = in.tellg();
-        std::string token;
-        while (isalpha(in.peek()) || in.peek() == '_') {
-            token.push_back(in.get());
-        }
-        
-        if (token == "_fun") {
-            return parse_fun(in);
-        }
-        else {
-            in.seekg(pos);
-            return parse_bool(in);
-        }
-    }
     else if (c == '(') {
         consume(in, '(');
-        skip_whitespace(in);
         Expr* expr = parse_expr(in);
         skip_whitespace(in);
         consume(in, ')');
         
-        // Check for function call
+        // Handle function calls after parentheses
         skip_whitespace(in);
         if (in.peek() == '(') {
             return parse_call(expr, in);
         }
         return expr;
     }
+    else if (isalpha(c) || c == '_') {
+        std::string token;
+        while (isalpha(in.peek()) || in.peek() == '_' || isdigit(in.peek())) {
+            token += in.get();
+        }
+
+        // Handle keywords
+        if (token == "_true") return new BoolExpr(true);
+        if (token == "_false") return new BoolExpr(false);
+        if (token == "_fun") return parse_fun(in);
+        if (token == "_let") return parse_let(in);
+        if (token == "_if") return parse_if(in);
+
+        // Handle function calls (f(x))
+        skip_whitespace(in);
+        if (in.peek() == '(') {
+            Expr* fun = new VarExpr(token);
+            return parse_call(fun, in);
+        }
+
+        // Regular variable
+        return new VarExpr(token);
+    }
     else {
         throw std::runtime_error("invalid input");
     }
 }
 
+
 Expr* parse_mult(std::istream& in) {
-    Expr* expr = parse_primary(in);
+    Expr* lhs = parse_primary(in);
     skip_whitespace(in);
 
     while (in.peek() == '*') {
         consume(in, '*');
+        skip_whitespace(in);
         Expr* rhs = parse_primary(in);
-        expr = new MultExpr(expr, rhs);
+        lhs = new MultExpr(lhs, rhs);
         skip_whitespace(in);
     }
 
-    return expr;
+    return lhs;
 }
 
 Expr* parse_add(std::istream& in) {
-    Expr* expr = parse_mult(in);
+    Expr* lhs = parse_mult(in);
     skip_whitespace(in);
 
     while (in.peek() == '+') {
         consume(in, '+');
+        skip_whitespace(in);
         Expr* rhs = parse_mult(in);
-        expr = new AddExpr(expr, rhs);
+        lhs = new AddExpr(lhs, rhs);
         skip_whitespace(in);
     }
 
-    return expr;
+    return lhs;
 }
 
 Expr* parse_let(std::istream& in) {
     skip_whitespace(in);
-    
-    std::string var;
-    while (isalpha(in.peek())) {
-        var.push_back(in.get());
-    }
+    std::string var = parse_var(in)->to_string();
     
     skip_whitespace(in);
     consume(in, '=');
     Expr* rhs = parse_expr(in);
     
     skip_whitespace(in);
+    if (in.peek() != '_') throw std::runtime_error("expected _in");
     std::string in_keyword;
     while (isalpha(in.peek()) || in.peek() == '_') {
-        in_keyword.push_back(in.get());
+        in_keyword += in.get();
     }
-    if (in_keyword != "_in") {
-        throw std::runtime_error("expected _in keyword");
-    }
+    if (in_keyword != "_in") throw std::runtime_error("expected _in");
     
     Expr* body = parse_expr(in);
     return new LetExpr(var, rhs, body);
 }
 
 Expr* parse_if(std::istream& in) {
+    // Parse _if keyword
+    skip_whitespace(in);
+    std::string keyword;
+    char c;
+    
+    // Read the keyword
+    while ((c = in.peek()) && (isalpha(c) || c == '_')) {
+        keyword += in.get();
+    }
+    
+    if (keyword != "_if") {
+        // Put back characters
+        for (auto it = keyword.rbegin(); it != keyword.rend(); ++it) {
+            in.putback(*it);
+        }
+        throw std::runtime_error("expected _if");
+    }
+
+    // Parse condition expression
+    skip_whitespace(in);
     Expr* cond = parse_expr(in);
     
+    // Parse _then keyword
     skip_whitespace(in);
-    std::string then_keyword;
-    while (isalpha(in.peek()) || in.peek() == '_') {
-        then_keyword.push_back(in.get());
+    keyword.clear();
+    while ((c = in.peek()) && (isalpha(c) || c == '_')) {
+        keyword += in.get();
     }
-    if (then_keyword != "_then") {
-        throw std::runtime_error("expected _then keyword");
+    if (keyword != "_then") {
+        throw std::runtime_error("expected _then");
     }
     
+    // Parse then branch
+    skip_whitespace(in);
     Expr* then_branch = parse_expr(in);
     
+    // Parse _else keyword
     skip_whitespace(in);
-    std::string else_keyword;
-    while (isalpha(in.peek()) || in.peek() == '_') {
-        else_keyword.push_back(in.get());
+    keyword.clear();
+    while ((c = in.peek()) && (isalpha(c) || c == '_')) {
+        keyword += in.get();
     }
-    if (else_keyword != "_else") {
-        throw std::runtime_error("expected _else keyword");
+    if (keyword != "_else") {
+        throw std::runtime_error("expected _else");
     }
     
+    skip_whitespace(in);
     Expr* else_branch = parse_expr(in);
+    
     return new IfExpr(cond, then_branch, else_branch);
 }
 
@@ -227,7 +241,7 @@ Expr* parse_expr(std::istream& in) {
         std::streampos pos = in.tellg();
         std::string keyword;
         while (isalpha(in.peek()) || in.peek() == '_') {
-            keyword.push_back(in.get());
+            keyword += in.get();
         }
         
         if (keyword == "_let") {
@@ -235,6 +249,13 @@ Expr* parse_expr(std::istream& in) {
         }
         else if (keyword == "_if") {
             return parse_if(in);
+        }
+        else if (keyword == "_true" || keyword == "_false") {
+            in.seekg(pos);
+            return parse_bool(in);
+        }
+        else if (keyword == "_fun") {
+            return parse_fun(in);
         }
         else {
             in.seekg(pos);
@@ -246,17 +267,12 @@ Expr* parse_expr(std::istream& in) {
 
 Expr* parse_str(const std::string& input) {
     std::istringstream in(input);
-    try {
-        Expr* expr = parse_expr(in);
-        skip_whitespace(in);
-
-        if (in.peek() != std::istream::traits_type::eof()) {
-            throw std::runtime_error("invalid input");
-        }
-
-        return expr;
-    }
-    catch (const std::runtime_error& e) {
+    Expr* expr = parse_expr(in);
+    skip_whitespace(in);
+    
+    if (in.peek() != EOF) {
         throw std::runtime_error("invalid input");
     }
+    
+    return expr;
 }

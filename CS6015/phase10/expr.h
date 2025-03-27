@@ -46,7 +46,8 @@ public:
 
 class AddExpr : public Expr {
 public:
-    std::unique_ptr<Expr> lhs, rhs;
+    std::unique_ptr<Expr> lhs;
+    std::unique_ptr<Expr> rhs;
     AddExpr(Expr* lhs, Expr* rhs);
     bool equals(Expr* rhs) override;
     Val* interp(Env* env) override;
@@ -59,7 +60,8 @@ public:
 
 class MultExpr : public Expr {
 public:
-    std::unique_ptr<Expr> lhs, rhs;
+    std::unique_ptr<Expr> lhs;
+    std::unique_ptr<Expr> rhs;
     MultExpr(Expr* lhs, Expr* rhs);
     bool equals(Expr* rhs) override;
     Val* interp(Env* env) override;
@@ -87,9 +89,9 @@ class LetExpr : public Expr {
 public:
     std::string var;
     std::unique_ptr<Expr> rhs;
-    std::unique_ptr<Expr> itself;
+    std::unique_ptr<Expr> body;  
 
-    LetExpr(std::string var, Expr* rhs, Expr* itself);
+    LetExpr(std::string var, Expr* rhs, Expr* body);
     bool equals(Expr* rhs) override;
     Val* interp(Env* env) override;
     bool has_variable() override;
@@ -130,11 +132,11 @@ public:
 
 class IfExpr : public Expr {
 public:
-    std::unique_ptr<Expr> condition;
-    std::unique_ptr<Expr> then_branch;
-    std::unique_ptr<Expr> else_branch;
+    std::unique_ptr<Expr> cond;
+    std::unique_ptr<Expr> then;
+    std::unique_ptr<Expr> else_;
 
-    IfExpr(Expr* condition, Expr* then_branch, Expr* else_branch);
+    IfExpr(Expr* cond, Expr* then, Expr* else_);
     bool equals(Expr* rhs) override;
     Val* interp(Env* env) override;
     bool has_variable() override;
@@ -146,10 +148,11 @@ public:
 
 class FunExpr : public Expr {
 public:
+    std::string arg;
     std::string formal_arg;
     std::unique_ptr<Expr> body;
 
-    FunExpr(std::string formal_arg, Expr* body);
+    FunExpr(std::string arg, Expr* body);
     bool equals(Expr* rhs) override;
     Val* interp(Env* env) override;
     bool has_variable() override;
@@ -157,14 +160,15 @@ public:
     void printExp(std::ostream &ot) const override;
     precedence_t precedence() override;
     std::string pretty_print() const override;
+    std::string pretty_print_at(precedence_t prec) const;
 };
 
 class CallExpr : public Expr {
 public:
-    std::unique_ptr<Expr> to_be_called;
-    std::unique_ptr<Expr> actual_arg;
+    std::unique_ptr<Expr> fun;
+    std::unique_ptr<Expr> arg;
 
-    CallExpr(Expr* to_be_called, Expr* actual_arg);
+    CallExpr(Expr* fun, Expr* arg);
     bool equals(Expr* rhs) override;
     Val* interp(Env* env) override;
     bool has_variable() override;
@@ -174,4 +178,4 @@ public:
     std::string pretty_print() const override;
 };
 
-#endif /* EXPR_H */
+#endif

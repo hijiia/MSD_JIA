@@ -101,12 +101,16 @@ std::string MultExpr::pretty_print() const {
     std::string left = lhs->pretty_print();
     std::string right = rhs->pretty_print();
     
+    // Remove parentheses for simple numbers
+    if (auto* num = dynamic_cast<NumExpr*>(lhs.get())) {
+        left = std::to_string(num->num);
+    }
+    
     if (lhs->precedence() < prec_mult) left = "(" + left + ")";
     if (rhs->precedence() < prec_mult) right = "(" + right + ")";
     
     return left + " * " + right;
 }
-
 // VAR
 VarExpr::VarExpr(std::string name) : name(name) {}
 
@@ -174,13 +178,20 @@ void LetExpr::printExp(std::ostream &ot) const {
 }
 
 std::string LetExpr::pretty_print() const {
+    std::string rhs_str = rhs->pretty_print();
     std::string body_str = body->pretty_print();
-    if (body->precedence() < prec_let) {
+    
+    // Special handling for function bodies
+    if (auto* fun = dynamic_cast<FunExpr*>(rhs.get())) {
+        rhs_str = fun->pretty_print();  // Use regular pretty_print for now
+    }
+    
+    if (body->precedence() <= prec_let) {
         body_str = "(" + body_str + ")";
     }
-    return "(_let " + var + " = " + rhs->pretty_print() + " _in " + body_str + ")";
+    
+    return "(_let " + var + "=" + rhs_str + " _in " + body_str + ")";
 }
-
 // BOOL
 BoolExpr::BoolExpr(bool value) : value(value) {}
 
@@ -322,13 +333,24 @@ precedence_t FunExpr::precedence() { return prec_fun; }
 
 std::string FunExpr::pretty_print() const {
     std::string body_str = body->pretty_print();
-    // Indent body
     size_t pos = 0;
-    while ((pos = body_str.find("\n", pos)) {
+    while ((pos = body_str.find("\n", pos)) != std::string::npos) {
         body_str.insert(pos + 1, "  ");
         pos += 3;
     }
     return "(_fun (" + arg + ")\n  " + body_str + ")";
+}
+std::string FunExpr::pretty_print_at(precedence_t prec) const {
+    std::string body_str = body->pretty_print();
+    
+    // Indent body if it spans multiple lines
+    size_t pos = 0;
+    while ((pos = body_str.find('\n', pos)) != std::string::npos) {
+        body_str.insert(pos + 1, "  ");
+        pos += 3;
+    }
+    
+    return "(_fun (" + formal_arg + ")\n  " + body_str + ")";
 }
 
 // CALL

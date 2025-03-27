@@ -20,9 +20,11 @@ msdscript: $(SRCS) $(HEADERS)
 test_msdscript: test_msdscript.cpp exec.cpp exec.h
 	$(CXX) $(CXXFLAGS) test_msdscript.cpp exec.cpp -o test_msdscript
 
-# Build expression tests
+## Build expression tests
+#test_expr: expr_test.cpp expr.cpp val.cpp parse.cpp env.cpp
+#	$(CXX) $(CXXFLAGS) expr_test.cpp expr.cpp val.cpp parse.cpp env.cpp -o test_expr
 test_expr: expr_test.cpp expr.cpp val.cpp parse.cpp env.cpp
-	$(CXX) $(CXXFLAGS) expr_test.cpp expr.cpp val.cpp parse.cpp env.cpp -o test_expr
+    g++ -std=c++14 -Wall -Wextra -g $^ -o $@ -lCatch2Main -lCatch2
 
 .PHONY: test test_expr_run clean doc
 

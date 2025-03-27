@@ -12,10 +12,9 @@ std::string random_expr_string() {
 }
 
 int main(int argc, char **argv) {
-    srand((unsigned int)time(nullptr));  // Seed random number generator
+    srand((unsigned int)time(nullptr));
 
     if (argc == 2) {
-        // Single msdscript: test print and interp consistency
         const char * const interp_argv[] = { "msdscript", "--interp" };
         const char * const print_argv[] = { "msdscript", "--print" };
 
@@ -37,7 +36,6 @@ int main(int argc, char **argv) {
         std::cout << "All tests passed\n";
 
     } else if (argc == 3) {
-        // Compare two msdscript executables with interp
         const char * const interp1_argv[] = { argv[1], "--interp" };
         const char * const interp2_argv[] = { argv[2], "--interp" };
 

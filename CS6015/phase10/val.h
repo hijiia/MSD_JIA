@@ -4,6 +4,9 @@
 #include "expr.h"
 #include <string>
 #include <memory>
+#include <iostream>
+
+class Env;  
 
 class Val {
 public:
@@ -21,8 +24,8 @@ public:
 
 class NumVal : public Val {
 public:
-    int value;
-    NumVal(int value);
+    int val;  // Changed from 'value' to 'val' to match implementation
+    NumVal(int val) : val(val) {}
     bool equals(Val* v) override;
     std::string to_string() override;
     Expr* to_expr() override;
@@ -34,8 +37,8 @@ public:
 
 class BoolVal : public Val {
 public:
-    bool value;
-    BoolVal(bool value);
+    bool val;  // Changed from 'value' to 'val' for consistency
+    BoolVal(bool val) : val(val) {}
     bool equals(Val* rhs) override;
     Val* add_to(Val* rhs) override;
     Val* mult_with(Val* rhs) override;
@@ -50,7 +53,7 @@ class FunVal : public Val {
 public:
     std::string formal_arg;
     std::unique_ptr<Expr> body;
-    std::unique_ptr<Env> env;  
+    std::unique_ptr<Env> env;
     
     FunVal(std::string formal_arg, Expr* body, Env* env = nullptr);
     bool equals(Val* v) override;
