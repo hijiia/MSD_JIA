@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17214A9B2D7BB2DB00EF738A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17214A9A2D7BB2DB00EF738A /* main.swift */; };
+		17214AA32D7BB2FE00EF738A /* HashTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17214AA12D7BB2FE00EF738A /* HashTable.cpp */; };
+		17214AA62D7BB33A00EF738A /* MyMalloc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17214AA42D7BB33A00EF738A /* MyMalloc.cpp */; };
+		17214AA92D7BB35F00EF738A /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17214AA72D7BB35F00EF738A /* tests.cpp */; };
+		17214AAC2D7BB37B00EF738A /* benchmark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17214AAA2D7BB37B00EF738A /* benchmark.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +27,14 @@
 
 /* Begin PBXFileReference section */
 		17214A972D7BB2DB00EF738A /* myMalloc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = myMalloc; sourceTree = BUILT_PRODUCTS_DIR; };
-		17214A9A2D7BB2DB00EF738A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		17214AA12D7BB2FE00EF738A /* HashTable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HashTable.cpp; sourceTree = "<group>"; };
+		17214AA22D7BB2FE00EF738A /* HashTable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HashTable.hpp; sourceTree = "<group>"; };
+		17214AA42D7BB33A00EF738A /* MyMalloc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MyMalloc.cpp; sourceTree = "<group>"; };
+		17214AA52D7BB33A00EF738A /* MyMalloc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MyMalloc.hpp; sourceTree = "<group>"; };
+		17214AA72D7BB35F00EF738A /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
+		17214AA82D7BB35F00EF738A /* tests.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tests.hpp; sourceTree = "<group>"; };
+		17214AAA2D7BB37B00EF738A /* benchmark.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = benchmark.cpp; sourceTree = "<group>"; };
+		17214AAB2D7BB37B00EF738A /* benchmark.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = benchmark.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +67,14 @@
 		17214A992D7BB2DB00EF738A /* myMalloc */ = {
 			isa = PBXGroup;
 			children = (
-				17214A9A2D7BB2DB00EF738A /* main.swift */,
+				17214AA12D7BB2FE00EF738A /* HashTable.cpp */,
+				17214AA22D7BB2FE00EF738A /* HashTable.hpp */,
+				17214AA42D7BB33A00EF738A /* MyMalloc.cpp */,
+				17214AA52D7BB33A00EF738A /* MyMalloc.hpp */,
+				17214AA72D7BB35F00EF738A /* tests.cpp */,
+				17214AA82D7BB35F00EF738A /* tests.hpp */,
+				17214AAA2D7BB37B00EF738A /* benchmark.cpp */,
+				17214AAB2D7BB37B00EF738A /* benchmark.hpp */,
 			);
 			path = myMalloc;
 			sourceTree = "<group>";
@@ -120,7 +137,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17214A9B2D7BB2DB00EF738A /* main.swift in Sources */,
+				17214AA32D7BB2FE00EF738A /* HashTable.cpp in Sources */,
+				17214AAC2D7BB37B00EF738A /* benchmark.cpp in Sources */,
+				17214AA62D7BB33A00EF738A /* MyMalloc.cpp in Sources */,
+				17214AA92D7BB35F00EF738A /* tests.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

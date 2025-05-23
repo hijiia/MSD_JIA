@@ -1,15 +1,15 @@
-#ifndef cmdline_hpp
-#define cmdline_hpp
-#include "catch.h"
+
+#ifndef CMDLINE_HPP
+#define CMDLINE_HPP
 
 typedef enum {
     do_nothing,
+    do_test,
     do_interp,
     do_print,
-    do_pretty_print,
-    do_test
+    do_pretty_print
 } run_mode_t;
 
-run_mode_t use_arguments(int argc, const char **argv);
+run_mode_t use_arguments(int argc, const char* argv[]);
 
-#endif
+#endif /* cmdline_hpp */

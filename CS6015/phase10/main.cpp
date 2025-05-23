@@ -1,33 +1,46 @@
-#define CATCH_CONFIG_RUNNER
 #include <iostream>
+#include <sstream>
 #include "cmdline.hpp"
 #include "expr.h"
-#include "parse.hpp"
-#include "catch.h"
-#include "env.h"
+#include "val.h"
+#include "pointer.h"
 
 int main(int argc, const char *argv[]) {
-    run_mode_t mode = use_arguments(argc, argv);
-
     try {
-        if (mode == do_interp) {
-            Expr *e = parse_expr(std::cin);
-            Env *env = new Env();
-            std::cout << e->interp(env) << std::endl;
-            delete env;
-        } else if (mode == do_print) {
-            Expr *e = parse_expr(std::cin);
-            std::cout << "(" << e->pretty_print() << ")" <<  std::endl;
-        } else if (mode == do_pretty_print) {
-            Expr *e = parse_expr(std::cin);
-            std::cout << e->pretty_print() << std::endl;
-        } else if (mode == do_test) {
-            int result = Catch::Session().run();
-            return result == 0 ? 0 : 1;
+        run_mode_t mode = use_arguments(argc, argv); // Determine mode from arguments
+
+        if (mode == do_nothing) {
+            return 0;
         }
-        return 0;
-    } catch (std::runtime_error exn) {
-        std::cerr << exn.what() << "\n";
-        return 1;
+        
+        std::string input;
+        std::getline(std::cin, input);
+        PTR(Expr) expr = parse_str(input);
+
+        switch (mode) {
+            case do_interp: {
+                PTR(Val) result = expr->interp();
+                std::cout << result->to_string() << "\n";
+                break;
+            }
+            case do_print:
+                expr->printExp(std::cout);
+                std::cout << "\n";
+                break;
+            case do_pretty_print:
+                std::cout << expr->to_pretty_string() << "\n";
+                break;
+            default:
+                break;
+        }
+
+        return 0; // Successful execution
+
+    } catch (const std::runtime_error &exn) {
+        std::cerr << "Error: " << exn.what() << "\n";
+        return 1; // Exit with code 1 on runtime errors
+    } catch (const std::exception &exn) {
+        std::cerr << "Unexpected Error: " << exn.what() << "\n";
+        return 1; // Exit with code 1 on other exceptions
     }
 }

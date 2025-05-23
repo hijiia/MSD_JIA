@@ -1,52 +1,77 @@
 
-# Source files
-SRCS = cmdline.cpp expr_test.cpp expr.cpp main.cpp parse.cpp val.cpp env.cpp
-
-# Header files
-HEADERS = cmdline.hpp expr.h val.h parse.hpp env.h
-
 # Compiler settings
-CXX = g++
-CXXFLAGS = -std=c++14 -Wall -Wextra -g
+CXX = clang++
+CXXFLAGS = -std=c++11 -Wall -Wextra -arch arm64 -g
+LDFLAGS =
 
-# Default target builds msdscript and test executables
-all: msdscript test_msdscript test_expr
+# Source files
+SRCS = expr.cpp tests.cpp cmdline.cpp main.cpp val.cpp
+OBJS = $(SRCS:.cpp=.o)
+TEST_OBJS = test_msdscript.cpp exec.cpp
+RUN_OBJS = run_msdscript.cpp exec.cpp
+RUN2_OBJS = run_msdscript2.cpp exec.cpp
+TARGET = msdscript
 
-# Build the main interpreter
-msdscript: $(SRCS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o msdscript
+# Versioning
+VERSION = 1.0.0
+BUILD_DATE = $(shell date +%Y%m%d)
 
-# Build the test runner
-test_msdscript: test_msdscript.cpp exec.cpp exec.h
-	$(CXX) $(CXXFLAGS) test_msdscript.cpp exec.cpp -o test_msdscript
+# Default target: build msdscript
+all: $(TARGET) test_msdscript run_msdscript run_msdscript2
 
-## Build expression tests
-#test_expr: expr_test.cpp expr.cpp val.cpp parse.cpp env.cpp
-#	$(CXX) $(CXXFLAGS) expr_test.cpp expr.cpp val.cpp parse.cpp env.cpp -o test_expr
-test_expr: expr_test.cpp expr.cpp val.cpp parse.cpp env.cpp
-    g++ -std=c++14 -Wall -Wextra -g $^ -o $@ -lCatch2Main -lCatch2
+# Build msdscript
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS) $(LDFLAGS)
+	chmod +x $(TARGET)
 
-.PHONY: test test_expr_run clean doc
+# Compile individual object files
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Run all tests
-test: test_expr_run test_msdscript_run
+# Build test_msdscript
+test_msdscript: $(TEST_OBJS)
+	$(CXX) $(CXXFLAGS) $(TEST_OBJS) -o $@
+	chmod +x $@
 
-# Run expression tests
-test_expr_run: test_expr
-	./test_expr
+# Build run_msdscript
+run_msdscript: $(RUN_OBJS)
+	$(CXX) $(CXXFLAGS) $(RUN_OBJS) -o $@
+	chmod +x $@
 
-# Run script tests
-test_msdscript_run: msdscript test_msdscript
-	@echo "Running single script tests with msdscript..."
-	./test_msdscript ./msdscript
-	@echo "Running comparison tests between msdscript and msdscript2..."
-	./test_msdscript ./msdscript ./msdscript2
+# Build run_msdscript2
+run_msdscript2: $(RUN2_OBJS)
+	$(CXX) $(CXXFLAGS) $(RUN2_OBJS) -o $@
+	chmod +x $@
 
-# Clean build artifacts
+# Run tests
+.PHONY: test
+test: test_msdscript $(TARGET)
+	./test_msdscript ./$(TARGET)
+	./test_msdscript ./$(TARGET) ./$(TARGET)
+
+# Install target
+.PHONY: install
+install: $(TARGET)
+	install -m 755 $(TARGET) /usr/local/bin/
+
+# Version information
+.PHONY: version
+version:
+	@echo "Version: $(VERSION)"
+	@echo "Build date: $(BUILD_DATE)"
+
+# Clean up all generated files
+.PHONY: clean
 clean:
-	rm -f msdscript msdscript2 test_msdscript test_expr *.o
-	rm -rf html latex
+	rm -f $(OBJS) $(TARGET) test_msdscript run_msdscript run_msdscript2 *.o
 
-# Generate documentation
-doc:
-	doxygen Doxyfile
+# Help target
+.PHONY: help
+help:
+	@echo "Available targets:"
+	@echo "  all            - Build all targets"
+	@echo "  test          - Run tests"
+	@echo "  install       - Install to /usr/local/bin"
+	@echo "  clean         - Remove generated files"
+	@echo "  version       - Show version information"
+	@echo "  help          - Show this help message"

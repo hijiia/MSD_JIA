@@ -9,6 +9,8 @@
 
 #include "exec.h"
 
+
+
 static const int READ_END  = 0;
 static const int WRITE_END = 1;
 
@@ -198,7 +200,7 @@ static void pump_from(int fd, std::string &str, bool &done) {
       } else {
         ssize_t old_len = str.length();
         str.insert(old_len, buffer, len);
-        assert(str.length() == old_len + len);
+        assert(str.length() == static_cast<size_t>(old_len + len));
       }
     }
   }

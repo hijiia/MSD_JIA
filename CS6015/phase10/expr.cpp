@@ -1,175 +1,267 @@
 #include "expr.h"
+#include "pointer.h"
 #include "val.h"
-#include "env.h"
+#include <stdexcept>
+#include <sstream>
+#include <cctype>
+#include "val.h"
+PTR(Expr) parse_inner(std::istream& in);
 
-std::string Expr::to_string() {
-    std::stringstream st;
-    this->printExp(st);
-    return st.str();
+//Expr
+std::string Expr::to_string() const {
+    std::stringstream ss;
+    this->printExp(ss);
+    return ss.str();
 }
 
-// NUM
-NumExpr::NumExpr(int num) : num(num) {}
-
-bool NumExpr::equals(Expr* rhs) {
-    NumExpr* n = dynamic_cast<NumExpr*>(rhs);
-    return n && this->num == n->num;
+void Expr::pretty_print(std::ostream& ot) const {
+    pretty_print_at(ot, prec_none);
 }
 
-Val* NumExpr::interp(Env* env) {
-    return new NumVal(num);
+std::string Expr::to_pretty_string() const {
+    std::stringstream ss;
+    this->pretty_print(ss);
+    return ss.str();
 }
 
-bool NumExpr::has_variable() { return false; }
-
-Expr* NumExpr::subst(std::string var, Expr* replacement) {
-    return new NumExpr(this->num);
+// NumExpr
+NumExpr::NumExpr(int val) {
+    this->val = val;
 }
 
-precedence_t NumExpr::precedence() { return prec_none; }
-
-void NumExpr::printExp(std::ostream &ot) const {
-    ot << num;
+bool NumExpr::equals(PTR(Expr) e) {
+    PTR(NumExpr) n = CAST(NumExpr)(e);
+    return n != nullptr && this->val == n->val;
 }
 
-std::string NumExpr::pretty_print() const { return std::to_string(num); }
-
-// ADD
-AddExpr::AddExpr(Expr* lhs, Expr* rhs) : lhs(lhs), rhs(rhs) {}
-
-bool AddExpr::equals(Expr* rhs) {
-    if (rhs == nullptr) return false;
-    AddExpr* n = dynamic_cast<AddExpr*>(rhs);
-    return n && lhs->equals(n->lhs.get()) && this->rhs->equals(n->rhs.get());
+PTR(Val) NumExpr::interp() {
+    return NEW(NumVal)(val);
 }
 
-Val* AddExpr::interp(Env* env) {
-    std::unique_ptr<Val> leftVal(lhs->interp(env));
-    std::unique_ptr<Val> rightVal(rhs->interp(env));
-    return leftVal->add_to(rightVal.get());
+bool NumExpr::has_variable() {
+    return false;
 }
 
-bool AddExpr::has_variable() { return lhs->has_variable() || rhs->has_variable(); }
-
-Expr* AddExpr::subst(std::string var, Expr* replacement) {
-    return new AddExpr(lhs->subst(var, replacement), rhs->subst(var, replacement));
+PTR(Expr) NumExpr::subst(const std::string& variable, PTR(Expr) replacement) {
+    (void)variable;
+    (void)replacement;
+    return NEW(NumExpr)(val);
 }
 
-precedence_t AddExpr::precedence() { return prec_add; }
+void NumExpr::printExp(std::ostream& ot) const {
+    ot << val;
+}
 
-void AddExpr::printExp(std::ostream &ot) const {
+void NumExpr::pretty_print_at(std::ostream& ot, precedence_t prec) const {
+    (void)prec;
+    ot << val;
+}
+
+//Add
+AddExpr::AddExpr(PTR(Expr) lhs, PTR(Expr) rhs) {
+    this->lhs = lhs;
+    this->rhs = rhs;
+}
+
+bool AddExpr::equals(PTR(Expr) e) {
+    PTR(AddExpr) a = CAST(AddExpr)(e);
+    return a != nullptr && lhs->equals(a->lhs) && rhs->equals(a->rhs);
+}
+
+PTR(Val) AddExpr::interp() {
+    PTR(Val) lhs_val = lhs->interp();
+    PTR(Val) rhs_val = rhs->interp();
+    return lhs_val->add_to(rhs_val);
+}
+
+bool AddExpr::has_variable() {
+    return lhs->has_variable() || rhs->has_variable();
+}
+
+PTR(Expr) AddExpr::subst(const std::string& variable, PTR(Expr) replacement) {
+    return NEW(AddExpr)(lhs->subst(variable, replacement), rhs->subst(variable, replacement));
+}
+
+void AddExpr::printExp(std::ostream& ot) const {
+    ot << "(";
     lhs->printExp(ot);
-    ot << " + ";
+    ot << "+";
     rhs->printExp(ot);
+    ot << ")";
 }
 
-std::string AddExpr::pretty_print() const {
-    return lhs->pretty_print() + " + " + rhs->pretty_print();
+void AddExpr::pretty_print_at(std::ostream& ot, precedence_t prec) const {
+    if (prec > prec_add) ot << "(";
+    lhs->pretty_print_at(ot, prec_add);
+    ot << " + ";
+    rhs->pretty_print_at(ot, prec_none);
+    if (prec > prec_add) ot << ")";
 }
 
-// MULT
-MultExpr::MultExpr(Expr* lhs, Expr* rhs) : lhs(lhs), rhs(rhs) {}
-
-bool MultExpr::equals(Expr* rhs) {
-    MultExpr* n = dynamic_cast<MultExpr*>(rhs);
-    return n && lhs->equals(n->lhs.get()) && this->rhs->equals(n->rhs.get());
+// MultExpr
+MultExpr::MultExpr(PTR(Expr) lhs, PTR(Expr) rhs) {
+    this->lhs = lhs;
+    this->rhs = rhs;
 }
 
-Val* MultExpr::interp(Env* env) {
-    std::unique_ptr<Val> leftVal(lhs->interp(env));
-    std::unique_ptr<Val> rightVal(rhs->interp(env));
-    return leftVal->mult_with(rightVal.get());
+bool MultExpr::equals(PTR(Expr) e) {
+    PTR(MultExpr) m = CAST(MultExpr)(e);
+    return m != nullptr && lhs->equals(m->lhs) && rhs->equals(m->rhs);
+}
+
+PTR(Val) MultExpr::interp() {
+    PTR(Val) lhs_val = lhs->interp();
+    PTR(Val) rhs_val = rhs->interp();
+    return lhs_val->mult_with(rhs_val);
 }
 
 bool MultExpr::has_variable() {
     return lhs->has_variable() || rhs->has_variable();
 }
 
-Expr* MultExpr::subst(std::string var, Expr* replacement) {
-    return new MultExpr(lhs->subst(var, replacement), rhs->subst(var, replacement));
+PTR(Expr) MultExpr::subst(const std::string& variable, PTR(Expr) replacement) {
+    return NEW(MultExpr)(lhs->subst(variable, replacement), rhs->subst(variable, replacement));
 }
 
-precedence_t MultExpr::precedence() { return prec_mult; }
-
-void MultExpr::printExp(std::ostream &ot) const {
+void MultExpr::printExp(std::ostream& ot) const {
+    ot << "(";
     lhs->printExp(ot);
-    ot << " * ";
+    ot << "*";
     rhs->printExp(ot);
+    ot << ")";
 }
 
-std::string MultExpr::pretty_print() const {
-    std::string left = lhs->pretty_print();
-    std::string right = rhs->pretty_print();
-    
-    // Remove parentheses for simple numbers
-    if (auto* num = dynamic_cast<NumExpr*>(lhs.get())) {
-        left = std::to_string(num->num);
+void MultExpr::pretty_print_at(std::ostream& ot, precedence_t prec) const {
+    if (prec >= prec_mult) ot << "(";
+
+    PTR(AddExpr) lhs_add = CAST(AddExpr)(lhs);
+    if (lhs_add != nullptr) {
+        ot << "(";
+        lhs->pretty_print_at(ot, prec_add);
+        ot << ")";
+    } else {
+        lhs->pretty_print_at(ot, prec_mult);
     }
     
-    if (lhs->precedence() < prec_mult) left = "(" + left + ")";
-    if (rhs->precedence() < prec_mult) right = "(" + right + ")";
+    ot << " * ";
     
-    return left + " * " + right;
-}
-// VAR
-VarExpr::VarExpr(std::string name) : name(name) {}
-
-bool VarExpr::equals(Expr* rhs) {
-    VarExpr* n = dynamic_cast<VarExpr*>(rhs);
-    return n && name == n->name;
-}
-
-Val* VarExpr::interp(Env* env) {
-    return env->lookup(name);
+    PTR(AddExpr) rhs_add = CAST(AddExpr)(rhs);
+    if (rhs_add != nullptr) {
+        ot << "(";
+        rhs->pretty_print_at(ot, prec_add);
+        ot << ")";
+    } else {
+        rhs->pretty_print_at(ot, prec_none);
+    }
+    
+    if (prec >= prec_mult) ot << ")";
 }
 
-bool VarExpr::has_variable() { return true; }
-
-Expr* VarExpr::subst(std::string var, Expr* replacement) {
-    if (name == var) return replacement;
-    return new VarExpr(name);
+//Var
+VarExpr::VarExpr(const std::string &name) {
+    this->name = name;
 }
 
-precedence_t VarExpr::precedence() { return prec_none; }
+bool VarExpr::equals(PTR(Expr) e) {
+    PTR(VarExpr) v = CAST(VarExpr)(e);
+    return v != nullptr && this->name == v->name;
+}
 
-void VarExpr::printExp(std::ostream &ot) const {
+PTR(Val) VarExpr::interp() {
+    throw std::runtime_error("no value for variable");
+}
+
+bool VarExpr::has_variable() {
+    return true;
+}
+
+PTR(Expr) VarExpr::subst(const std::string& variable, PTR(Expr) replacement) {
+    if (name == variable) {
+        return replacement->clone();
+    } else {
+        return NEW(VarExpr)(name);
+    }
+}
+
+void VarExpr::printExp(std::ostream& ot) const {
     ot << name;
 }
 
-std::string VarExpr::pretty_print() const { return name; }
-
-// LET
-LetExpr::LetExpr(std::string var, Expr* rhs, Expr* body)
-    : var(var), rhs(rhs), body(body) {}
-
-bool LetExpr::equals(Expr* rhs) {
-    LetExpr* other = dynamic_cast<LetExpr*>(rhs);
-    return other && var == other->var &&
-           this->rhs->equals(other->rhs.get()) &&
-           this->body->equals(other->body.get());
+void VarExpr::pretty_print_at(std::ostream& ot, precedence_t prec) const {
+    (void)prec;
+    ot << name;
 }
 
-Val* LetExpr::interp(Env* env) {
-    Val* rhs_val = rhs->interp(env);
-    Env new_env(var, rhs_val, env);
-    return body->interp(&new_env);
+// Clone implementation
+PTR(Expr) NumExpr::clone() const {
+    return NEW(NumExpr)(val);
+}
+
+PTR(Expr) AddExpr::clone() const {
+    return NEW(AddExpr)(lhs->clone(), rhs->clone());
+}
+
+PTR(Expr) MultExpr::clone() const {
+    return NEW(MultExpr)(lhs->clone(), rhs->clone());
+}
+
+PTR(Expr) VarExpr::clone() const {
+    return NEW(VarExpr)(name);
+}
+
+PTR(Expr) LetExpr::clone() const {
+    return NEW(LetExpr)(var, rhs->clone(), body->clone());
+}
+
+PTR(Expr) BoolExpr::clone() const {
+    return NEW(BoolExpr)(val);
+}
+
+PTR(Expr) EqExpr::clone() const {
+    return NEW(EqExpr)(lhs->clone(), rhs->clone());
+}
+
+PTR(Expr) IfExpr::clone() const {
+    return NEW(IfExpr)(test_part->clone(), then_part->clone(), else_part->clone());
+}
+
+PTR(Expr) FunExpr::clone() const {
+    return NEW(FunExpr)(formal_arg, body->clone());
+}
+
+PTR(Expr) CallExpr::clone() const {
+    return NEW(CallExpr)(to_be_called->clone(), actual_arg->clone());
+}
+
+// Let
+LetExpr::LetExpr(const std::string& var, PTR(Expr) rhs, PTR(Expr) body)
+    : var(var), rhs(rhs), body(body) {}
+
+bool LetExpr::equals(PTR(Expr) e) {
+    PTR(LetExpr) l = CAST(LetExpr)(e);
+    return l != nullptr && var == l->var && rhs->equals(l->rhs) && body->equals(l->body);
+}
+
+PTR(Val) LetExpr::interp() {
+    PTR(Val) rhs_val = rhs->interp();
+    PTR(Expr) rhs_expr = rhs_val->to_expr();
+    PTR(Expr) substitutedBody = body->subst(var, rhs_expr);
+    return substitutedBody->interp();
 }
 
 bool LetExpr::has_variable() {
     return rhs->has_variable() || body->has_variable();
 }
 
-Expr* LetExpr::subst(std::string var, Expr* replacement) {
-    if (this->var == var) {
-        return new LetExpr(var, rhs->subst(var, replacement), body.get());
+PTR(Expr) LetExpr::subst(const std::string& variable, PTR(Expr) replacement) {
+    if (var == variable) {
+        return NEW(LetExpr)(var, rhs->subst(variable, replacement), body->clone());
+    } else {
+        return NEW(LetExpr)(var, rhs->subst(variable, replacement), body->subst(variable, replacement));
     }
-    return new LetExpr(var, rhs->subst(var, replacement),
-                     body->subst(var, replacement));
 }
 
-precedence_t LetExpr::precedence() { return prec_let; }
-
-void LetExpr::printExp(std::ostream &ot) const {
+void LetExpr::printExp(std::ostream& ot) const {
     ot << "(_let " << var << "=";
     rhs->printExp(ot);
     ot << " _in ";
@@ -177,215 +269,527 @@ void LetExpr::printExp(std::ostream &ot) const {
     ot << ")";
 }
 
-std::string LetExpr::pretty_print() const {
-    std::string rhs_str = rhs->pretty_print();
-    std::string body_str = body->pretty_print();
-    
-    // Special handling for function bodies
-    if (auto* fun = dynamic_cast<FunExpr*>(rhs.get())) {
-        rhs_str = fun->pretty_print();  // Use regular pretty_print for now
-    }
-    
-    if (body->precedence() <= prec_let) {
-        body_str = "(" + body_str + ")";
-    }
-    
-    return "(_let " + var + "=" + rhs_str + " _in " + body_str + ")";
-}
-// BOOL
-BoolExpr::BoolExpr(bool value) : value(value) {}
-
-bool BoolExpr::equals(Expr* rhs) {
-    BoolExpr* b = dynamic_cast<BoolExpr*>(rhs);
-    return b && value == b->value;
+void LetExpr::pretty_print_at(std::ostream& ot, precedence_t prec) const {
+    (void)prec;
+    ot << "_let " << var << " = ";
+    rhs->pretty_print_at(ot, prec_none);
+    ot << "\n_in  ";
+    body->pretty_print_at(ot, prec_none);
 }
 
-Val* BoolExpr::interp(Env* env) {
-    return new BoolVal(value);
+// Bool
+BoolExpr::BoolExpr(bool val) {
+    this->val = val;
 }
 
-bool BoolExpr::has_variable() { return false; }
-
-Expr* BoolExpr::subst(std::string var, Expr* replacement) {
-    return this;
+bool BoolExpr::equals(PTR(Expr) e) {
+    PTR(BoolExpr) b = CAST(BoolExpr)(e);
+    return b != nullptr && this->val == b->val;
 }
 
-void BoolExpr::printExp(std::ostream &out) const {
-    out << (value ? "_true" : "_false");
+PTR(Val) BoolExpr::interp() {
+    return NEW(BoolVal)(val);
 }
 
-precedence_t BoolExpr::precedence() { return prec_none; }
-
-std::string BoolExpr::pretty_print() const {
-    return value ? "_true" : "_false";
+bool BoolExpr::has_variable() {
+    return false;
 }
 
-// EQ
-EqExpr::EqExpr(Expr* lhs, Expr* rhs) : lhs(lhs), rhs(rhs) {}
-
-bool EqExpr::equals(Expr* rhs) {
-    EqExpr* e = dynamic_cast<EqExpr*>(rhs);
-    return e && lhs->equals(e->lhs.get()) && this->rhs->equals(e->rhs.get());
+PTR(Expr) BoolExpr::subst(const std::string& variable, PTR(Expr) replacement) {
+    (void)variable;
+    (void)replacement;
+    return NEW(BoolExpr)(val);
 }
 
-Val* EqExpr::interp(Env* env) {
-    Val* lhs_val = lhs->interp(env);
-    Val* rhs_val = rhs->interp(env);
-    return new BoolVal(lhs_val->equals(rhs_val));
+void BoolExpr::printExp(std::ostream& ot) const {
+    ot << (val ? "_true" : "_false");
+}
+
+void BoolExpr::pretty_print_at(std::ostream& ot, precedence_t prec) const {
+    (void)prec;
+    ot << (val ? "_true" : "_false");
+}
+
+// EqExpr
+EqExpr::EqExpr(PTR(Expr) lhs, PTR(Expr) rhs) {
+    this->lhs = lhs;
+    this->rhs = rhs;
+}
+
+bool EqExpr::equals(PTR(Expr) e) {
+    PTR(EqExpr) eq = CAST(EqExpr)(e);
+    return eq != nullptr && lhs->equals(eq->lhs) && rhs->equals(eq->rhs);
+}
+
+PTR(Val) EqExpr::interp() {
+    PTR(Val) lhs_val = lhs->interp();
+    PTR(Val) rhs_val = rhs->interp();
+    return lhs_val->equals_to(rhs_val);
 }
 
 bool EqExpr::has_variable() {
     return lhs->has_variable() || rhs->has_variable();
 }
 
-Expr* EqExpr::subst(std::string var, Expr* replacement) {
-    return new EqExpr(lhs->subst(var, replacement), rhs->subst(var, replacement));
+PTR(Expr) EqExpr::subst(const std::string& variable, PTR(Expr) replacement) {
+    return NEW(EqExpr)(lhs->subst(variable, replacement), rhs->subst(variable, replacement));
 }
 
-void EqExpr::printExp(std::ostream &out) const {
-    out << "(";
-    lhs->printExp(out);
-    out << " == ";
-    rhs->printExp(out);
-    out << ")";
+void EqExpr::printExp(std::ostream& ot) const {
+    ot << "(";
+    lhs->printExp(ot);
+    ot << "==";
+    rhs->printExp(ot);
+    ot << ")";
 }
 
-precedence_t EqExpr::precedence() { return prec_none; }
-
-std::string EqExpr::pretty_print() const {
-    return "(" + lhs->pretty_print() + " == " + rhs->pretty_print() + ")";
+void EqExpr::pretty_print_at(std::ostream& ot, precedence_t prec) const {
+    if (prec > prec_eq) ot << "(";
+    lhs->pretty_print_at(ot, prec_eq);
+    ot << " == ";
+    rhs->pretty_print_at(ot, prec_none);
+    if (prec > prec_eq) ot << ")";
 }
 
-// IF
-IfExpr::IfExpr(Expr* cond, Expr* then, Expr* else_)
-    : cond(cond), then(then), else_(else_) {}
-
-bool IfExpr::equals(Expr* rhs) {
-    IfExpr* i = dynamic_cast<IfExpr*>(rhs);
-    return i && cond->equals(i->cond.get()) &&
-           then->equals(i->then.get()) &&
-           else_->equals(i->else_.get());
+//If
+IfExpr::IfExpr(PTR(Expr) test_part, PTR(Expr) then_part, PTR(Expr) else_part) {
+    this->test_part = test_part;
+    this->then_part = then_part;
+    this->else_part = else_part;
 }
 
-Val* IfExpr::interp(Env* env) {
-    Val* cond_val = cond->interp(env);
-    BoolVal* b = dynamic_cast<BoolVal*>(cond_val);
-    if (!b) throw std::runtime_error("Condition must be boolean");
-    return b->is_true() ? then->interp(env) : else_->interp(env);
+bool IfExpr::equals(PTR(Expr) e) {
+    PTR(IfExpr) i = CAST(IfExpr)(e);
+    return i != nullptr &&
+           test_part->equals(i->test_part) &&
+           then_part->equals(i->then_part) &&
+           else_part->equals(i->else_part);
+}
+
+PTR(Val) IfExpr::interp() {
+    PTR(Val) test_val = test_part->interp();
+    
+    if (test_val->is_true()) {
+        return then_part->interp();
+    } else {
+        return else_part->interp();
+    }
 }
 
 bool IfExpr::has_variable() {
-    return cond->has_variable() || then->has_variable() || else_->has_variable();
+    return test_part->has_variable() || then_part->has_variable() || else_part->has_variable();
 }
 
-Expr* IfExpr::subst(std::string var, Expr* replacement) {
-    return new IfExpr(cond->subst(var, replacement),
-                     then->subst(var, replacement),
-                     else_->subst(var, replacement));
+PTR(Expr) IfExpr::subst(const std::string& variable, PTR(Expr) replacement) {
+    return NEW(IfExpr)(test_part->subst(variable, replacement),
+                     then_part->subst(variable, replacement),
+                     else_part->subst(variable, replacement));
 }
 
-void IfExpr::printExp(std::ostream &out) const {
-    out << "(_if ";
-    cond->printExp(out);
-    out << " _then ";
-    then->printExp(out);
-    out << " _else ";
-    else_->printExp(out);
-    out << ")";
+void IfExpr::printExp(std::ostream& ot) const {
+    ot << "(_if ";
+    test_part->printExp(ot);
+    ot << " _then ";
+    then_part->printExp(ot);
+    ot << " _else ";
+    else_part->printExp(ot);
+    ot << ")";
 }
 
-precedence_t IfExpr::precedence() { return prec_none; }
-
-std::string IfExpr::pretty_print() const {
-    return "(_if " + cond->pretty_print() +
-           "\n    _then " + then->pretty_print() +
-           "\n    _else " + else_->pretty_print() + ")";
+void IfExpr::pretty_print_at(std::ostream& ot, precedence_t prec) const {
+    if (prec > prec_none) ot << "(";
+    ot << "_if ";
+    test_part->pretty_print_at(ot, prec_none);
+    ot << "\n_then ";
+    then_part->pretty_print_at(ot, prec_none);
+    ot << "\n_else ";
+    else_part->pretty_print_at(ot, prec_none);
+    if (prec > prec_none) ot << ")";
 }
 
-// FUN
-FunExpr::FunExpr(std::string arg, Expr* body) : arg(arg), body(body) {}
+//FunExpr
+FunExpr::FunExpr(const std::string& formal_arg, PTR(Expr) body)
+    : formal_arg(formal_arg), body(body) {}
 
-bool FunExpr::equals(Expr* rhs) {
-    FunExpr* f = dynamic_cast<FunExpr*>(rhs);
-    return f && arg == f->arg && body->equals(f->body.get());
+bool FunExpr::equals(PTR(Expr) e) {
+    PTR(FunExpr) f = CAST(FunExpr)(e);
+    return f != nullptr && formal_arg == f->formal_arg && body->equals(f->body);
 }
 
-Val* FunExpr::interp(Env* env) {
-    return new FunVal(arg, body.get(), env);
+PTR(Val) FunExpr::interp() {
+    return NEW(FunVal)(formal_arg, body->clone());
 }
 
 bool FunExpr::has_variable() {
     return body->has_variable();
 }
 
-Expr* FunExpr::subst(std::string var, Expr* replacement) {
-    if (var == arg) return this;
-    return new FunExpr(arg, body->subst(var, replacement));
+PTR(Expr) FunExpr::subst(const std::string& variable, PTR(Expr) replacement) {
+    if (variable == formal_arg)
+        return NEW(FunExpr)(formal_arg, body->clone());
+    return NEW(FunExpr)(formal_arg, body->subst(variable, replacement));
 }
 
-void FunExpr::printExp(std::ostream &ot) const {
-    ot << "(_fun (" << arg << ") ";
+void FunExpr::printExp(std::ostream& ot) const {
+    ot << "(_fun (" << formal_arg << ") ";
     body->printExp(ot);
     ot << ")";
 }
 
-precedence_t FunExpr::precedence() { return prec_fun; }
-
-std::string FunExpr::pretty_print() const {
-    std::string body_str = body->pretty_print();
-    size_t pos = 0;
-    while ((pos = body_str.find("\n", pos)) != std::string::npos) {
-        body_str.insert(pos + 1, "  ");
-        pos += 3;
-    }
-    return "(_fun (" + arg + ")\n  " + body_str + ")";
-}
-std::string FunExpr::pretty_print_at(precedence_t prec) const {
-    std::string body_str = body->pretty_print();
-    
-    // Indent body if it spans multiple lines
-    size_t pos = 0;
-    while ((pos = body_str.find('\n', pos)) != std::string::npos) {
-        body_str.insert(pos + 1, "  ");
-        pos += 3;
-    }
-    
-    return "(_fun (" + formal_arg + ")\n  " + body_str + ")";
+void FunExpr::pretty_print_at(std::ostream& ot, precedence_t prec) const {
+    if (prec > prec_none) ot << "(";
+    ot << "_fun (" << formal_arg << ")\n  ";
+    body->pretty_print_at(ot, prec_none);
+    if (prec > prec_none) ot << ")";
 }
 
-// CALL
-CallExpr::CallExpr(Expr* fun, Expr* arg) : fun(fun), arg(arg) {}
+//CallExpr
+CallExpr::CallExpr(PTR(Expr) to_be_called, PTR(Expr) actual_arg)
+    : to_be_called(to_be_called), actual_arg(actual_arg) {}
 
-bool CallExpr::equals(Expr* rhs) {
-    CallExpr* c = dynamic_cast<CallExpr*>(rhs);
-    return c && fun->equals(c->fun.get()) && arg->equals(c->arg.get());
+bool CallExpr::equals(PTR(Expr) e) {
+    PTR(CallExpr) c = CAST(CallExpr)(e);
+    return c != nullptr && to_be_called->equals(c->to_be_called) && actual_arg->equals(c->actual_arg);
 }
 
-Val* CallExpr::interp(Env* env) {
-    Val* fun_val = fun->interp(env);
-    FunVal* f = dynamic_cast<FunVal*>(fun_val);
-    if (!f) throw std::runtime_error("Cannot call non-function");
-    Val* arg_val = arg->interp(env);
-    return f->call(arg_val);
+PTR(Val) CallExpr::interp() {
+    PTR(Val) func_val = to_be_called->interp();
+    PTR(Val) arg_val = actual_arg->interp();
+    return func_val->call(arg_val);
 }
 
 bool CallExpr::has_variable() {
-    return fun->has_variable() || arg->has_variable();
+    return to_be_called->has_variable() || actual_arg->has_variable();
 }
 
-Expr* CallExpr::subst(std::string var, Expr* replacement) {
-    return new CallExpr(fun->subst(var, replacement), arg->subst(var, replacement));
+PTR(Expr) CallExpr::subst(const std::string& variable, PTR(Expr) replacement) {
+    return NEW(CallExpr)(to_be_called->subst(variable, replacement), actual_arg->subst(variable, replacement));
 }
 
-void CallExpr::printExp(std::ostream &ot) const {
-    fun->printExp(ot);
+void CallExpr::printExp(std::ostream& ot) const {
+    to_be_called->printExp(ot);
     ot << "(";
-    arg->printExp(ot);
+    actual_arg->printExp(ot);
     ot << ")";
 }
 
-precedence_t CallExpr::precedence() { return prec_none; }
+void CallExpr::pretty_print_at(std::ostream& ot, precedence_t prec) const {
+    (void)prec;
+    to_be_called->pretty_print_at(ot, prec_none);
+    ot << "(";
+    actual_arg->pretty_print_at(ot, prec_none);
+    ot << ")";
+}
 
-std::string CallExpr::pretty_print() const {
-    return fun->pretty_print() + "(" + arg->pretty_print() + ")";
+// Parsing functions
+PTR(Expr) parse_keyword(std::istream &in, char prefix) {
+    std::string keyword;
+    while (isalpha(in.peek())) {
+        keyword += in.get();
+    }
+
+    if (keyword == "let") {
+        return parse_let(in);
+    }
+    else if (keyword == "if") {
+        return parse_if(in);
+    }
+    else if (keyword == "true") {
+        return NEW(BoolExpr)(true);
+    }
+    else if (keyword == "false") {
+        return NEW(BoolExpr)(false);
+    }
+    else if (keyword == "fun") {
+        return parse_fun(in);
+    }
+    else {
+        throw std::runtime_error("invalid keyword: " + keyword);
+    }
+}
+
+PTR(Expr) parse_let(std::istream &in) {
+    consume_whitespace(in);
+    
+    // Parse the variable name
+    std::string var_name;
+    while (std::isalnum(in.peek())) {
+        var_name += in.get();
+    }
+    
+    consume_whitespace(in);
+    
+    // Parse the equals sign
+    if (in.peek() != '=') {
+        throw std::runtime_error("expected '=' after variable in let expression");
+    }
+    in.get(); // consume '='
+    
+    consume_whitespace(in);
+    
+    // Parse the right-hand side expression
+    PTR(Expr) rhs = parse_expr(in);
+    
+    consume_whitespace(in);
+    
+    // Parse the "_in" or "*in" keyword
+    char prefix = in.peek();
+    if (prefix != '_' && prefix != '*') {
+        throw std::runtime_error("expected '_in' or '*in' after right-hand side in let expression");
+    }
+    in.get(); // consume '_' or '*'
+    
+    // Read "in"
+    std::string keyword;
+    while (std::isalpha(in.peek())) {
+        keyword += in.get();
+    }
+    
+    if (keyword != "in") {
+        throw std::runtime_error("expected '_in' or '*in' after right-hand side in let expression");
+    }
+    
+    consume_whitespace(in);
+    
+    // Parse the body expression
+    PTR(Expr) body = parse_expr(in);
+    
+    return NEW(LetExpr)(var_name, rhs, body);
+}
+
+PTR(Expr) parse_if(std::istream &in) {
+    consume_whitespace(in);
+    
+    // Parse test condition
+    PTR(Expr) test_expr = parse_expr(in);
+    
+    consume_whitespace(in);
+    
+    // Parse "_then" or "*then" keyword
+    char prefix = in.peek();
+    if (prefix != '_' && prefix != '*') {
+        throw std::runtime_error("expected '_then' or '*then' after test condition in if expression");
+    }
+    in.get(); // consume '_' or '*'
+    
+    // Read "then"
+    std::string keyword;
+    while (std::isalpha(in.peek())) {
+        keyword += in.get();
+    }
+    
+    if (keyword != "then") {
+        throw std::runtime_error("expected '_then' or '*then' after test condition in if expression");
+    }
+    
+    consume_whitespace(in);
+    
+    // Parse then branch
+    PTR(Expr) then_expr = parse_expr(in);
+    
+    consume_whitespace(in);
+    
+    // Parse "_else" or "*else" keyword
+    prefix = in.peek();
+    if (prefix != '_' && prefix != '*') {
+        throw std::runtime_error("expected '_else' or '*else' after then branch in if expression");
+    }
+    in.get(); // consume '_' or '*'
+    
+    // Read "else"
+    keyword.clear();
+    while (std::isalpha(in.peek())) {
+        keyword += in.get();
+    }
+    
+    if (keyword != "else") {
+        throw std::runtime_error("expected '_else' or '*else' after then branch in if expression");
+    }
+    
+    consume_whitespace(in);
+    
+    // Parse else branch
+    PTR(Expr) else_expr = parse_expr(in);
+    
+    return NEW(IfExpr)(test_expr, then_expr, else_expr);
+}
+
+PTR(Expr) parse_fun(std::istream& in) {
+    consume_whitespace(in);
+    if (in.peek() != '(') throw std::runtime_error("expected (");
+    in.get(); // consume '('
+    
+    consume_whitespace(in);
+    
+    std::string var;
+    while (std::isalnum(in.peek())) var += in.get();
+    
+    consume_whitespace(in);
+    
+    if (in.peek() != ')') throw std::runtime_error("expected )");
+    in.get(); // consume ')'
+    
+    consume_whitespace(in);
+    
+    PTR(Expr) body = parse_expr(in);
+    return NEW(FunExpr)(var, body);
+}
+
+PTR(Expr) parse(std::istream &in) {
+    consume_whitespace(in);
+    return parse_expr(in);
+}
+
+PTR(Expr) parse_str(const std::string &s) {
+    std::istringstream in(s);
+    try {
+        return parse(in);
+    } catch (const std::invalid_argument& e) {
+        throw std::runtime_error(std::string("invalid input"));
+    } catch (const std::runtime_error& e) {
+        throw std::runtime_error(std::string("invalid input"));
+    }
+}
+
+PTR(Expr) parse_expr(std::istream &in) {
+    PTR(Expr) lhs = parse_comparg(in);
+    consume_whitespace(in);
+    
+    // Check for equality operator
+    if (in.peek() == '=') {
+        in.get();
+        if (in.peek() == '=') {
+            in.get();
+            consume_whitespace(in);
+            PTR(Expr) rhs = parse_expr(in); // Right recursive for equality
+            return NEW(EqExpr)(lhs, rhs);
+        } else {
+            // Single '=' is not valid here
+            throw std::runtime_error("invalid input: expected '=='");
+        }
+    }
+    
+    return lhs;
+}
+
+PTR(Expr) parse_comparg(std::istream &in) {
+    PTR(Expr) lhs = parse_addend(in);
+    consume_whitespace(in);
+    
+    while (in.peek() == '+') {
+        in.get();
+        consume_whitespace(in);
+        PTR(Expr) rhs = parse_addend(in);
+        lhs = NEW(AddExpr)(lhs, rhs);
+        consume_whitespace(in);
+    }
+    
+    return lhs;
+}
+
+PTR(Expr) parse_addend(std::istream &in) {
+    PTR(Expr) lhs = parse_multicand(in);
+    consume_whitespace(in);
+    
+    while (in.peek() == '*') {
+        in.get();
+        consume_whitespace(in);
+        PTR(Expr) rhs = parse_multicand(in);
+        lhs = NEW(MultExpr)(lhs, rhs);
+        consume_whitespace(in);
+    }
+    
+    return lhs;
+}
+
+PTR(Expr) parse_multicand(std::istream &in) {
+    PTR(Expr) expr = parse_inner(in);
+    consume_whitespace(in);
+    
+    while (in.peek() == '(') {
+        in.get(); // consume '('
+        consume_whitespace(in);
+        
+        PTR(Expr) arg = parse_expr(in);
+        consume_whitespace(in);
+        
+        if (in.peek() != ')') {
+            throw std::runtime_error("expected closing parenthesis in function call");
+        }
+        in.get(); // consume ')'
+        
+        expr = NEW(CallExpr)(expr, arg);
+        consume_whitespace(in);
+    }
+    
+    return expr;
+}
+
+PTR(Expr) parse_inner(std::istream& in) {
+    consume_whitespace(in);
+    
+    char next = in.peek();
+    
+    if (next == '(') {
+        in.get(); // consume '('
+        consume_whitespace(in);
+        
+        if (in.peek() == ')') {
+            in.get(); // consume ')'
+            throw std::runtime_error("empty parentheses are not allowed");
+        }
+        
+        PTR(Expr) expr = parse_expr(in);
+        consume_whitespace(in);
+        
+        if (in.peek() != ')') {
+            throw std::runtime_error("expected closing parenthesis");
+        }
+        in.get(); // consume ')'
+        return expr;
+    } else if (isdigit(next)) {
+        return parse_num(in);
+    } else if (next == '_' || next == '*') {
+        char prefix = next;
+        in.get(); // consume '_' or '*'
+        return parse_keyword(in, prefix);
+    } else if (isalpha(next)) {
+        return parse_var(in);
+    } else if (next == '-') {
+        in.get(); // consume '-'
+        if (isdigit(in.peek())) {
+            int num;
+            in >> num;
+            return NEW(NumExpr)(-num);
+        } else {
+            throw std::runtime_error("invalid negative number format");
+        }
+    } else {
+        throw std::runtime_error("unexpected character in expression");
+    }
+}
+
+PTR(Expr) parse_var(std::istream &in) {
+    std::string var;
+    while (std::isalnum(in.peek())) {
+        var += in.get();
+    }
+    
+    if (var.empty()) {
+        throw std::runtime_error("expected variable name");
+    }
+    
+    return NEW(VarExpr)(var);
+}
+
+PTR(Expr) parse_num(std::istream &in) {
+    int num;
+    if (!(in >> num)) {
+        throw std::runtime_error("invalid number format");
+    }
+    return NEW(NumExpr)(num);
+}
+
+void consume_whitespace(std::istream &in) {
+    while (std::isspace(in.peek())) in.get();
 }

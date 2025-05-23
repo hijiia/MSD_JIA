@@ -1,69 +1,80 @@
 #ifndef VAL_H
 #define VAL_H
 
+#include "pointer.h"
 #include "expr.h"
 #include <string>
-#include <memory>
-#include <iostream>
+#include <stdexcept>
+#include <sstream>
 
-class Env;  
 
-class Val {
+class Expr;
+class NumExpr;
+class BoolExpr;
+class FunExpr;
+
+// Base class
+CLASS(Val) {
 public:
-    virtual ~Val() {}
-    virtual bool equals(Val* v) = 0;
+    virtual ~Val() = default;
+    
+    virtual bool equals(PTR(Val) other) = 0;
+    virtual PTR(Expr) to_expr() = 0;
     virtual std::string to_string() = 0;
-    virtual Expr* to_expr() = 0;
-    virtual Val* add_to(Val* v) = 0;
-    virtual Val* mult_with(Val* v) = 0;
-    virtual int to_int() = 0;
-    virtual bool is_true() { throw std::runtime_error("Not a boolean value"); }
-    virtual void print(std::ostream &out) = 0;
-    virtual Val* call(Val* arg) { throw std::runtime_error("Not a function value"); }
+    virtual PTR(Val) add_to(PTR(Val) other) = 0;
+    virtual PTR(Val) mult_with(PTR(Val) other) = 0;
+    virtual PTR(Val) equals_to(PTR(Val) other) = 0;
+    virtual bool is_true() = 0;
+    virtual PTR(Val) call(PTR(Val) actual_arg_val) = 0;
 };
 
+// Numeric value
 class NumVal : public Val {
 public:
-    int val;  // Changed from 'value' to 'val' to match implementation
-    NumVal(int val) : val(val) {}
-    bool equals(Val* v) override;
+    int val;
+    
+    NumVal(int val);
+    bool equals(PTR(Val) other) override;
+    PTR(Expr) to_expr() override;
     std::string to_string() override;
-    Expr* to_expr() override;
-    Val* add_to(Val* v) override;
-    Val* mult_with(Val* v) override;
-    int to_int() override;
-    void print(std::ostream &out) override;
+    PTR(Val) add_to(PTR(Val) other) override;
+    PTR(Val) mult_with(PTR(Val) other) override;
+    PTR(Val) equals_to(PTR(Val) other) override;
+    bool is_true() override;
+    PTR(Val) call(PTR(Val) actual_arg_val) override;
 };
 
+// Boolean value
 class BoolVal : public Val {
 public:
-    bool val;  // Changed from 'value' to 'val' for consistency
-    BoolVal(bool val) : val(val) {}
-    bool equals(Val* rhs) override;
-    Val* add_to(Val* rhs) override;
-    Val* mult_with(Val* rhs) override;
-    bool is_true() override;
-    void print(std::ostream &out) override;
+    bool val;
+    
+    BoolVal(bool val);
+    bool equals(PTR(Val) other) override;
+    PTR(Expr) to_expr() override;
     std::string to_string() override;
-    Expr* to_expr() override;
-    int to_int() override;
+    PTR(Val) add_to(PTR(Val) other) override;
+    PTR(Val) mult_with(PTR(Val) other) override;
+    PTR(Val) equals_to(PTR(Val) other) override;
+    bool is_true() override;
+    PTR(Val) call(PTR(Val) actual_arg_val) override;
 };
 
+// Function value
 class FunVal : public Val {
 public:
     std::string formal_arg;
-    std::unique_ptr<Expr> body;
-    std::unique_ptr<Env> env;
+    PTR(Expr) body;
     
-    FunVal(std::string formal_arg, Expr* body, Env* env = nullptr);
-    bool equals(Val* v) override;
+    FunVal(const std::string& formal_arg, PTR(Expr) body);
+    bool equals(PTR(Val) other) override;
+    PTR(Expr) to_expr() override;
     std::string to_string() override;
-    Expr* to_expr() override;
-    Val* add_to(Val* v) override;
-    Val* mult_with(Val* v) override;
-    int to_int() override;
-    void print(std::ostream &out) override;
-    Val* call(Val* arg) override;
+    PTR(Val) add_to(PTR(Val) other) override;
+    PTR(Val) mult_with(PTR(Val) other) override;
+    PTR(Val) equals_to(PTR(Val) other) override;
+    bool is_true() override;
+    PTR(Val) call(PTR(Val) actual_arg_val) override;
 };
 
-#endif /* VAL_H */
+#endif // VAL_H

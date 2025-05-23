@@ -1,181 +1,213 @@
 #ifndef EXPR_H
 #define EXPR_H
 
+#include "pointer.h"
+#include "val.h"
+#include <string>
 #include <iostream>
 #include <sstream>
-#include <string>
 #include <stdexcept>
-#include <memory>
 
 class Val;
-class Env;
 
 typedef enum {
-    prec_none,  // = 0 num and var type
-    prec_add,   // = 1 add type
-    prec_mult,  // = 2 mult type
-    prec_let,   // = 3 let type
-    prec_fun    // = 4 function type
+    prec_none,
+    prec_eq,
+    prec_add,
+    prec_mult
 } precedence_t;
 
-class Expr {
+// Base class
+CLASS(Expr) {
 public:
-    virtual ~Expr() {}
-    virtual bool equals(Expr* rhs) = 0;
-    virtual Val* interp(Env* env) = 0;
+    virtual ~Expr() = default;
+    
+    virtual bool equals(PTR(Expr) e) = 0;
+    virtual PTR(Val) interp() = 0;
     virtual bool has_variable() = 0;
-    virtual Expr* subst(std::string var, Expr* replacement) = 0;
-    virtual void printExp(std::ostream &ot) const = 0;
-    virtual precedence_t precedence() = 0;
-    virtual std::string pretty_print() const = 0;
-    std::string to_string();
+    virtual PTR(Expr) subst(const std::string& variable, PTR(Expr) replacement) = 0;
+    virtual void printExp(std::ostream& ot) const = 0;
+    virtual void pretty_print_at(std::ostream& ot, precedence_t prec) const = 0;
+    virtual PTR(Expr) clone() const = 0;
+
+    std::string to_string() const;
+    void pretty_print(std::ostream& ot) const;
+    std::string to_pretty_string() const;
 };
 
+// Numeric expression
 class NumExpr : public Expr {
 public:
-    int num;
-    NumExpr(int num);
-    bool equals(Expr* rhs) override;
-    Val* interp(Env* env) override;
+    int val;
+    
+    NumExpr(int val);
+    bool equals(PTR(Expr) e) override;
+    PTR(Val) interp() override;
     bool has_variable() override;
-    Expr* subst(std::string var, Expr* replacement) override;
-    void printExp(std::ostream &ot) const override;
-    std::string pretty_print() const override;
-    precedence_t precedence() override;
+    PTR(Expr) subst(const std::string& variable, PTR(Expr) replacement) override;
+    void printExp(std::ostream& ot) const override;
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override;
+    PTR(Expr) clone() const override;
 };
 
+// Addition expression
 class AddExpr : public Expr {
 public:
-    std::unique_ptr<Expr> lhs;
-    std::unique_ptr<Expr> rhs;
-    AddExpr(Expr* lhs, Expr* rhs);
-    bool equals(Expr* rhs) override;
-    Val* interp(Env* env) override;
+    PTR(Expr) lhs;
+    PTR(Expr) rhs;
+    
+    AddExpr(PTR(Expr) lhs, PTR(Expr) rhs);
+    bool equals(PTR(Expr) e) override;
+    PTR(Val) interp() override;
     bool has_variable() override;
-    Expr* subst(std::string var, Expr* replacement) override;
-    void printExp(std::ostream &ot) const override;
-    std::string pretty_print() const override;
-    precedence_t precedence() override;
+    PTR(Expr) subst(const std::string& variable, PTR(Expr) replacement) override;
+    void printExp(std::ostream& ot) const override;
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override;
+    PTR(Expr) clone() const override;
 };
 
+// Multiplication expression
 class MultExpr : public Expr {
 public:
-    std::unique_ptr<Expr> lhs;
-    std::unique_ptr<Expr> rhs;
-    MultExpr(Expr* lhs, Expr* rhs);
-    bool equals(Expr* rhs) override;
-    Val* interp(Env* env) override;
+    PTR(Expr) lhs;
+    PTR(Expr) rhs;
+    
+    MultExpr(PTR(Expr) lhs, PTR(Expr) rhs);
+    bool equals(PTR(Expr) e) override;
+    PTR(Val) interp() override;
     bool has_variable() override;
-    Expr* subst(std::string var, Expr* replacement) override;
-    void printExp(std::ostream &ot) const override;
-    std::string pretty_print() const override;
-    precedence_t precedence() override;
+    PTR(Expr) subst(const std::string& variable, PTR(Expr) replacement) override;
+    void printExp(std::ostream& ot) const override;
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override;
+    PTR(Expr) clone() const override;
 };
 
+// Variable expression
 class VarExpr : public Expr {
 public:
     std::string name;
-    VarExpr(std::string name);
-    bool equals(Expr* rhs) override;
-    Val* interp(Env* env) override;
+    
+    VarExpr(const std::string& name);
+    bool equals(PTR(Expr) e) override;
+    PTR(Val) interp() override;
     bool has_variable() override;
-    Expr* subst(std::string var, Expr* replacement) override;
-    void printExp(std::ostream &ot) const override;
-    std::string pretty_print() const override;
-    precedence_t precedence() override;
+    PTR(Expr) subst(const std::string& variable, PTR(Expr) replacement) override;
+    void printExp(std::ostream& ot) const override;
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override;
+    PTR(Expr) clone() const override;
 };
 
+// Let expression
 class LetExpr : public Expr {
 public:
     std::string var;
-    std::unique_ptr<Expr> rhs;
-    std::unique_ptr<Expr> body;  
-
-    LetExpr(std::string var, Expr* rhs, Expr* body);
-    bool equals(Expr* rhs) override;
-    Val* interp(Env* env) override;
+    PTR(Expr) rhs;
+    PTR(Expr) body;
+    
+    LetExpr(const std::string& var, PTR(Expr) rhs, PTR(Expr) body);
+    bool equals(PTR(Expr) e) override;
+    PTR(Val) interp() override;
     bool has_variable() override;
-    Expr* subst(std::string var, Expr* replacement) override;
-    void printExp(std::ostream &ot) const override;
-    std::string pretty_print() const override;
-    precedence_t precedence() override;
+    PTR(Expr) subst(const std::string& variable, PTR(Expr) replacement) override;
+    void printExp(std::ostream& ot) const override;
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override;
+    PTR(Expr) clone() const override;
 };
 
+// Boolean expression
 class BoolExpr : public Expr {
 public:
-    bool value;
-
-    BoolExpr(bool value);
-    bool equals(Expr* rhs) override;
-    Val* interp(Env* env) override;
+    bool val;
+    
+    BoolExpr(bool val);
+    bool equals(PTR(Expr) e) override;
+    PTR(Val) interp() override;
     bool has_variable() override;
-    Expr* subst(std::string var, Expr* replacement) override;
-    void printExp(std::ostream &out) const override;
-    precedence_t precedence() override;
-    std::string pretty_print() const override;
+    PTR(Expr) subst(const std::string& variable, PTR(Expr) replacement) override;
+    void printExp(std::ostream& ot) const override;
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override;
+    PTR(Expr) clone() const override;
 };
 
+// Equality expression
 class EqExpr : public Expr {
 public:
-    std::unique_ptr<Expr> lhs;
-    std::unique_ptr<Expr> rhs;
-
-    EqExpr(Expr* lhs, Expr* rhs);
-    bool equals(Expr* rhs) override;
-    Val* interp(Env* env) override;
+    PTR(Expr) lhs;
+    PTR(Expr) rhs;
+    
+    EqExpr(PTR(Expr) lhs, PTR(Expr) rhs);
+    bool equals(PTR(Expr) e) override;
+    PTR(Val) interp() override;
     bool has_variable() override;
-    Expr* subst(std::string var, Expr* replacement) override;
-    void printExp(std::ostream &out) const override;
-    precedence_t precedence() override;
-    std::string pretty_print() const override;
+    PTR(Expr) subst(const std::string& variable, PTR(Expr) replacement) override;
+    void printExp(std::ostream& ot) const override;
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override;
+    PTR(Expr) clone() const override;
 };
 
+// If expression
 class IfExpr : public Expr {
 public:
-    std::unique_ptr<Expr> cond;
-    std::unique_ptr<Expr> then;
-    std::unique_ptr<Expr> else_;
-
-    IfExpr(Expr* cond, Expr* then, Expr* else_);
-    bool equals(Expr* rhs) override;
-    Val* interp(Env* env) override;
+    PTR(Expr) test_part;
+    PTR(Expr) then_part;
+    PTR(Expr) else_part;
+    
+    IfExpr(PTR(Expr) test_part, PTR(Expr) then_part, PTR(Expr) else_part);
+    bool equals(PTR(Expr) e) override;
+    PTR(Val) interp() override;
     bool has_variable() override;
-    Expr* subst(std::string var, Expr* replacement) override;
-    void printExp(std::ostream &out) const override;
-    precedence_t precedence() override;
-    std::string pretty_print() const override;
+    PTR(Expr) subst(const std::string& variable, PTR(Expr) replacement) override;
+    void printExp(std::ostream& ot) const override;
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override;
+    PTR(Expr) clone() const override;
 };
 
+// Function expression
 class FunExpr : public Expr {
 public:
-    std::string arg;
     std::string formal_arg;
-    std::unique_ptr<Expr> body;
+    PTR(Expr) body;
 
-    FunExpr(std::string arg, Expr* body);
-    bool equals(Expr* rhs) override;
-    Val* interp(Env* env) override;
+    FunExpr(const std::string& formal_arg, PTR(Expr) body);
+    bool equals(PTR(Expr) e) override;
+    PTR(Val) interp() override;
     bool has_variable() override;
-    Expr* subst(std::string var, Expr* replacement) override;
-    void printExp(std::ostream &ot) const override;
-    precedence_t precedence() override;
-    std::string pretty_print() const override;
-    std::string pretty_print_at(precedence_t prec) const;
+    PTR(Expr) subst(const std::string& variable, PTR(Expr) replacement) override;
+    void printExp(std::ostream& ot) const override;
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override;
+    PTR(Expr) clone() const override;
 };
 
+// Function call expression
 class CallExpr : public Expr {
 public:
-    std::unique_ptr<Expr> fun;
-    std::unique_ptr<Expr> arg;
+    PTR(Expr) to_be_called;
+    PTR(Expr) actual_arg;
 
-    CallExpr(Expr* fun, Expr* arg);
-    bool equals(Expr* rhs) override;
-    Val* interp(Env* env) override;
+    CallExpr(PTR(Expr) to_be_called, PTR(Expr) actual_arg);
+    bool equals(PTR(Expr) e) override;
+    PTR(Val) interp() override;
     bool has_variable() override;
-    Expr* subst(std::string var, Expr* replacement) override;
-    void printExp(std::ostream &ot) const override;
-    precedence_t precedence() override;
-    std::string pretty_print() const override;
+    PTR(Expr) subst(const std::string& variable, PTR(Expr) replacement) override;
+    void printExp(std::ostream& ot) const override;
+    void pretty_print_at(std::ostream& ot, precedence_t prec) const override;
+    PTR(Expr) clone() const override;
 };
 
-#endif
+// Parsing functions
+void consume_whitespace(std::istream& in);
+PTR(Expr) parse_str(const std::string& s);
+PTR(Expr) parse(std::istream& in);
+PTR(Expr) parse_expr(std::istream& in);
+PTR(Expr) parse_comparg(std::istream& in);
+PTR(Expr) parse_addend(std::istream& in);
+PTR(Expr) parse_multicand(std::istream& in);
+PTR(Expr) parse_inner(std::istream& in);
+PTR(Expr) parse_var(std::istream& in);
+PTR(Expr) parse_num(std::istream& in);
+PTR(Expr) parse_let(std::istream& in);
+PTR(Expr) parse_if(std::istream& in);
+PTR(Expr) parse_fun(std::istream& in);
+PTR(Expr) parse_keyword(std::istream& in, char prefix);
+
+#endif // EXPR_H
