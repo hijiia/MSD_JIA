@@ -12,7 +12,7 @@ import android.util.Log
 class ShakeDetector(
     private val sensorManager: SensorManager,
     private val onShake: (gForce: Float) -> Unit,
-    private val thresholdG: Float = 2.5f,
+    private val thresholdG: Float = 1.0f,
     private val cooldownMs: Long = 350L
 ) : SensorEventListener {
 
@@ -38,6 +38,7 @@ class ShakeDetector(
         val gy = event.values[1] / SensorManager.GRAVITY_EARTH
         val gz = event.values[2] / SensorManager.GRAVITY_EARTH
         val gForce = sqrt(gx * gx + gy * gy + gz * gz)
+        Log.d("Shake", "ax=$gx, ay=$gy, az=$gz, gForce=$gForce")
 
         val now = System.currentTimeMillis()
         if (gForce > thresholdG && (now - lastShakeAt) > cooldownMs) {
