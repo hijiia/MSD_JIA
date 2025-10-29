@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  # OpenLDAP Identity Provider
+  ldap:
+    image: osixia/openldap:latest
+
+    hostname: "ldap.fancycamera.msd.localhost"
+
+    ports:
+      - "8389:389"   # LDAP port
+      - "8636:636"   # LDAPS (secure) port
+
+    environment:
+      - LDAP_ORGANIZATION=FancyCamera
+      - LDAP_DOMAIN=fancycamera.msd.localhost
+      - LDAP_ADMIN_PASSWORD=fancycamerapass
+      - LDAP_LOG_LEVEL=256
+      - LDAP_TLS=false
+
+    # Named volume for persistent storage
+    volumes:
+      - ldap-data:/var/lib/ldap
+      - ldap-config:/etc/ldap/slapd.d
+
+    command: "--loglevel debug"
+
+    networks:
+      - backend
+      - public
+
+    restart: unless-stopped
+
+  # FancyCameraServer Application
+  fancycamera-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: fancycamera-server:latest
+
+    hostname: "api.fancycamera.msd.localhost"
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      - LDAP_URL=ldap://ldap:389
+      - JWT_SECRET=${JWT_SECRET:-change-this-secret-in-production}
+
+    # Volume for photo uploads persistence
+    volumes:
+      - photo-uploads:/app/uploads
+
+    depends_on:
+      - ldap
+
+    networks:
+      - backend  # Internal network for LDAP communication
+      - public   # External network for API access
+
+    restart: unless-stopped
+
+# Named volumes for data persistence
+volumes:
+  # LDAP data storage - persists user accounts and directory information
+  ldap-data:
+    driver: local
+    name: fancycamera-ldap-data
+
+  # LDAP configuration - persists LDAP server configuration
+  ldap-config:
+    driver: local
+    name: fancycamera-ldap-config
+
+  # Photo uploads storage - persists uploaded photos
+  photo-uploads:
+    driver: local
+    name: fancycamera-photos
+
+# Network configuration
+networks:
+  # Public network - accessible from outside
+  public:
+    driver: bridge
+
+  # Backend network - internal only, for secure LDAP communication
+  backend:
+    driver: bridge
+    internal: true
